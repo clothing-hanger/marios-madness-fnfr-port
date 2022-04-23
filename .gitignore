@@ -1,0 +1,28 @@
+# macOS
+*.DS_Store
+
+# Visual Studio Code
+.vscode/*
+
+# Build
+build/*
+
+# Dependencies
+resources/macos/love.app/*
+resources/switch/love.elf
+resources/win32/love/*
+resources/win64/love/*
+
+# Tools
+tools/funkin-json/*
+tools/funkin-json-sniff/*
+tools/funkin-xml/*
+tools/funkin-xna/*
+
+!tools/funkin-json/funkin-json.py
+!tools/funkin-json-sniff/funkin-json-sniff.py
+!tools/funkin-xml/funkin-xml.py
+!tools/funkin-xna/funkin-xna.py
+
+# Clothing Hanger stuff
+*.lnk
