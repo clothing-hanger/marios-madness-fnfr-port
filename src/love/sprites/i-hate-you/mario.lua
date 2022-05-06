@@ -85,7 +85,8 @@ return graphics.newSprite(
 	},
 	{
 		["idle"] = {start = 46, stop = 61, speed = 24, offsetX = 0, offsetY = 0},
-		["grab"] = {start = 1, stop = 45, speed = 24, offsetX = 0, offsetY = 0}
+		["grab"] = {start = 1, stop = 45, speed = 24, offsetX = 0, offsetY = 0},
+		["empty"] = {start = 1, stop = 1, speed = 24, offsetX = 0, offsetY = 0}
 	},
 	"idle",
 	false

@@ -25,7 +25,13 @@ return {
 	enter = function(self, from, songNum, songAppend)
 		weeks:enter()
 
-		weekNumber = "i-hate-you"
+		weekNumber = "i-hate-you"  -- haha just like how the marios madness devs hate me    why do they keep ignoring me 
+--[[----------------------------------------------------------------------------
+
+none of this works and it was a huge waste of time
+
+i want to delete this port but i have spent too much time on it 
+
 
 		lavaOne = false
 		lavaTwo = false
@@ -55,9 +61,7 @@ return {
 
 		lavaIsUp = false
 		lavaIsUpAgain = false
-
-
-
+------------------------------------------------------------------------------]]
 		song = songNum
 		difficulty = songAppend
 
@@ -83,13 +87,15 @@ return {
 		girlfriend.x, girlfriend.y = 30, -90
 		enemy.x, enemy.y = -380, -110
 		boyfriend.x, boyfriend.y = 260, 100
+		mario.x, mario.y = -500, 50
+		marioTwo.x, marioTwo.y = 500, 50
 
 		enemyIcon:animate("daddy dearest", false)
 		boo:animate("anim", true)
 		candle:animate("anim", true)
 		candleOne:animate("anim", true)
-		mario:animate("idle", true)
-		marioTwo:animate("grab", true)
+		mario:animate("empty", true)
+		marioTwo:animate("empty", true)
 
 		self:load()
 	end,
@@ -121,6 +127,18 @@ return {
 		candleOne:update(dt)
 		mario:update(dt)
 		marioTwo:update(dt)
+
+		if musicTime >= 10000 then
+			if mario:getAnimName() == "empty" then
+				mario:animate("grab", true)
+			--	weeks:safeAnimate(mario, "grab")
+			end
+			if mario:getAnimName() == "empty" then
+				marioTwo:animate("grab", true)
+			--	weeks:safeAnimate(marioTwo, "grab")
+			end
+		end
+
 
 	
 		if health >= 80 then
@@ -339,7 +357,7 @@ return {
 --		end
 
 --]]  
-
+--[[
 	if musicTime > 98571.42 then
 		if lava.y == 500 then
 			Timer.tween(5, lava, {x = lava.x, y = -40}, "linear")
@@ -373,6 +391,7 @@ return {
 	--		Timer.tween(0.2, lava, {x = lava.x, y = 500}, "linear")
 	--	end
 	--end
+	--]]  
 
 
 

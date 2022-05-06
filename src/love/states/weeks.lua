@@ -819,7 +819,7 @@ return {
 					if combo >= 5 then self:safeAnimate(girlfriend, "sad", true, 1) end
 
 					combo = 0
-					misses = misses + 1
+
 					if settings.suddenDeath then
 						health = health - 1000
 					else
@@ -931,6 +931,7 @@ return {
 
 					score = score - 10
 					combo = 0
+					misses = misses + 1
 
 					if settings.suddenDeath then
 						health = health - 1000
