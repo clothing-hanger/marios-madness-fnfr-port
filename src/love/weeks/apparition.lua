@@ -167,7 +167,7 @@ return {
 					if redThingExists then  -- I KNOW TRUE FALSE EXISTS BUT IT NEVER FUCKING WORKS SO I USE 0 AND 1
 						redThing:draw() -- :trolleybus:  
 						redThing.sizeX, redThing.sizeY = redThingSize, redThingSize
-						cameraZoom = cameraZoom + 0.0008                --fuck you guglio theres a reason i dont use true false but in this case it did work so i will leave it
+						cameraZoom = cameraZoom + (0.05 * love.timer.getDelta())  --fuck you guglio theres a reason i dont use true false but in this case it did work so i will leave it -- nah you just don't know how to use them lmao
 					end
 				end
 
