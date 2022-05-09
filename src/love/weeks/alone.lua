@@ -259,9 +259,12 @@ return {
 	end,
 
 	leave = function(self)
-		stageBack = nil
-		stageFront = nil
-		curtains = nil
+		LayerZero = nil
+		mansion = nil
+		hang = nil
+		rain = nil
+		lightning = nil
+
 
 		weeks:leave()
 	end

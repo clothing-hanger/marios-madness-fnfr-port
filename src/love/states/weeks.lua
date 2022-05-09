@@ -133,6 +133,7 @@ return {
 		combo = 0
 
 		enemy:animate("idle")
+		enemyTwo = enemy
 		enemyTwo:animate("idle")
 		boyfriend:animate("idle")
 
@@ -1080,12 +1081,18 @@ return {
 			end
 
 			if mechanics then
+				if settings.downscroll then
+					love.graphics.scale(1, -1) -- now we flip the y-axis for downscroll users!
+				end
 				love.graphics.setColor(176 / 255, 0, 0)
 				lava:draw()
 				love.graphics.rectangle("fill", -1000, lavaFixed, 10000, 10000)
 				love.graphics.setColor(1, 1, 1)
 				lava:draw()
 				love.graphics.setColor(1, 1, 1)
+				if settings.downscroll then
+					love.graphics.scale(1, -1) -- now we put it back to normal to not fuck up the rest of the UI
+				end
 			end
 
 

@@ -152,9 +152,11 @@ return {
 	end,
 
 	leave = function(self)
-		stageBack = nil
-		stageFront = nil
-		curtains = nil
+		LayerZero = nil
+		LayerOne = nil
+		LayerTwo = nil
+		LayerThree = nil
+		Ground = nil
 
 		weeks:leave()
 	end
