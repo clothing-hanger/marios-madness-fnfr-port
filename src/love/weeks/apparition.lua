@@ -38,7 +38,6 @@ return {
 		bg = love.filesystem.load("sprites/apparition/bg.lua")()
 		bg.sizeX, bg.sizeY = 1.5, 1.5
 		enemy = love.filesystem.load("sprites/apparition/wario.lua")()
-		enemyTwo = love.filesystem.load("sprites/apparition/wario.lua")()
 		boyfriend = love.filesystem.load("sprites/apparition/boyfriend.lua")()
 		bodyOne = love.filesystem.load("sprites/apparition/bodyOne.lua")()
 		bodyTwo = love.filesystem.load("sprites/apparition/bodyTwo.lua")()
@@ -168,7 +167,7 @@ return {
 					if redThingExists then  -- I KNOW TRUE FALSE EXISTS BUT IT NEVER FUCKING WORKS SO I USE 0 AND 1
 						redThing:draw() -- :trolleybus:  
 						redThing.sizeX, redThing.sizeY = redThingSize, redThingSize
-						cameraZoom = cameraZoom + 0.0008                --fuck you guglio theres a reason i dont use true false but in this case it did work so i will leave it
+						cameraZoom = cameraZoom + (0.05 * love.timer.getDelta())  --fuck you guglio theres a reason i dont use true false but in this case it did work so i will leave it -- nah you just don't know how to use them lmao
 					end
 				end
 
@@ -193,9 +192,10 @@ return {
 	end,
 
 	leave = function(self)
-		stageBack = nil
-		stageFront = nil
-		curtains = nil
+		bodyOne = nil
+		bodyTwo = nil
+		bg = nil
+		redThing = nil
 
 		weeks:leave()
 	end

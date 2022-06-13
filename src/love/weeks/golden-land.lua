@@ -215,9 +215,12 @@ return {
 	end,
 
 	leave = function(self)
-		stageBack = nil
-		stageFront = nil
-		curtains = nil
+		enemyTwo = nil
+		LayerOne = nil
+		LayerTwo = nil
+		LayerThree = nil
+		LayerThreeDark = nil
+		fakeGirlfriend = nil
 
 		weeks:leave()
 	end

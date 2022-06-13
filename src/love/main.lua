@@ -21,7 +21,7 @@ function love.load()
 	local curOS = love.system.getOS()
 
 	simoc = false -- this is important :)
-
+	--               is it tho?
 	mechanics = true
 
 	
