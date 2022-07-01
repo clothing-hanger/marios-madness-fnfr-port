@@ -27,40 +27,16 @@ return {
 
 		weekNumber = "powerdown"
 
-		blackScreen = false
-
-		lightning = love.audio.newSource("sounds/week2/thunder1.ogg", "static")
-
-		fading = 0
-		fadingTwo = 1
-		fadingThree = 0
-		fadingFour = 1
-		wahooFade = 1
-		fadingRed = 1
-
-		red = false
-
-
 		song = songNum
 		difficulty = songAppend
 
 		bg = graphics.newImage(love.graphics.newImage(graphics.imagePath("powerdown/bg")))
 		ground = graphics.newImage(love.graphics.newImage(graphics.imagePath("powerdown/ground")))
 		luigi = graphics.newImage(love.graphics.newImage(graphics.imagePath("powerdown/luigi")))
-		wahoo = graphics.newImage(love.graphics.newImage(graphics.imagePath("powerdown/wahoo")))
-		girlfriend = love.filesystem.load("sprites/powerdown/girlfriend.lua")()
-		boyfriend = love.filesystem.load("sprites/powerdown/boyfriend.lua")()
+		girlfriend = love.filesystem.load("sprites/its-a-me/girlfriend.lua")()
+		boyfriend = love.filesystem.load("sprites/i-hate-you/boyfriend.lua")()
 		bush = love.filesystem.load("sprites/powerdown/bush.lua")()
 		cloud = love.filesystem.load("sprites/powerdown/cloud.lua")()
-
-		cam.sizeX, cam.sizeY = 0.8, 0.8
-		camScale.sizeX, camScale.sizeY = 0.8, 0.8
-
-		marioTalk = love.filesystem.load("sprites/powerdown/marioTalk.lua")()
-		marioTalkTwo = love.filesystem.load("sprites/powerdown/marioTalk.lua")()  -- there is a good reason for two of these
-
-		marioTalk.x, marioTalk.y = 160, 0
-		marioTalkTwo.x, marioTalkTwo.y = marioTalk.x, marioTalk.y
 
 
 		enemy = love.filesystem.load("sprites/powerdown/mario.lua")()
@@ -69,32 +45,12 @@ return {
 			fakeBoyfriend = love.filesystem.load("sprites/boyfriend.lua")() -- Used for game over
 			boyfriend = love.filesystem.load("sprites/simoc.lua")()
 		end
+		
 		girlfriend.x, girlfriend.y = 30, -90
-		enemy.x, enemy.y = -410, -110
-		boyfriend.x, boyfriend.y = 280, 100
-
-		cloud.x, cloud.y = -500, -500
-		luigi.x, luigi.y = 515, 80 
-
-		wahoo.sizeY, wahoo.sizeX = 0, 0
-		wahoo.y = -75
-
-
-		--size
-		boyfriend.sizeX, boyfriend.sizeY = 0.9, 0.9
-		enemy.sizeX, enemy.sizeY = 0.8, 0.8
-		girlfriend.sizeX, girlfriend.sizeY = 0.9, 0.9
-		luigi.sizeX, luigi.sizeY = 0.7, 0.7
-		bush.sizeX, bush.sizeY = 0.7, 0.7
-		cloud.sizeY, cloud.sizeX = 0.7, 0.7
+		enemy.x, enemy.y = -380, -110
+		boyfriend.x, boyfriend.y = 260, 100
 
 		enemyIcon:animate("daddy dearest", false)
-		marioTalk:animate("anim", true)
-		marioTalkTwo:animate("anim", true)
-		cloud:animate("anim", true)
-		bush:animate("anim", true)
-
-
 
 		self:load()
 	end,
@@ -119,14 +75,7 @@ return {
 
 	update = function(self, dt)
 		weeks:update(dt)
-		marioTalk:update(dt)
-		marioTalkTwo:update(dt)
-		bush:update(dt)
-		cloud:update(dt)
 
-		
-		delta = love.timer.getDelta()
-	
 		if health >= 80 then
 			if enemyIcon:getAnimName() == "daddy dearest" then
 				enemyIcon:animate("daddy dearest losing", false)
@@ -252,82 +201,12 @@ return {
 				ground:draw()
 
 				girlfriend:draw()
-				luigi:draw()
-				enemy:draw()
-				boyfriend:draw()
 			love.graphics.pop()
 			love.graphics.push()
 				love.graphics.translate(cam.x, cam.y)
 
-
-
-				love.graphics.setColor(1, 1, 1, wahooFade)
-				wahoo:draw()
-				love.graphics.setColor(1, 1, 1, 1)
-
-				if musicTime > 118612 and musicTime < 122080 then
-
-					if musicTime >= 3750 then
-						graphics.setColor(0, 0, 0, fading)
-						if fading < 1 then fading = fading + 0.95 * delta end
-		
-						love.graphics.rectangle("fill", -10000, -10000, 100000, 100000)
-					end
-				end
-
-
-				if musicTime > 122070 then
-					graphics.setColor(0, 0, 0, fadingTwo)
-					love.graphics.rectangle("fill", -10000, -10000, 100000, 100000)
-					if musicTime > 123988 then
-						if fadingTwo > 0 then fadingTwo = fadingTwo - 0.9999 * delta end
-					end
-				end
-
-
-				if musicTime > 124161 and wahoo.sizeY == 0 then
-					Timer.tween(1.1, wahoo, {orientation = wahoo.orientation - 0.5, sizeX = 1, sizeY = 1, y = wahoo.y - 620}, "out-quad")
-				end 
-
-				--124161
-
-
-
-
-
-				if musicTime > 119739 and musicTime < 121387 then
-
-					graphics.setColor(1, 1, 1, fading)
-					if fadingThree < 1 then fadingThree = fadingThree + 0.95 * delta end
-
-					marioTalk:draw()
-				end
-
-
-				if musicTime > 121380 then
-					graphics.setColor(1, 1, 1, fadingFour)
-					if not red then
-						marioTalkTwo:draw()
-					end
-					if musicTime > 123988 then
-						if fadingFour > 0 then fadingFour = fadingFour - 0.9999 * delta end
-					end
-				end
-
-				if musicTime > 124160 then
-					graphics.setColor(1, 0, 0, fadingRed)
-					if fadingRed > 0 then fadingRed = fadingRed - 0.99999 * delta end
-	
-					love.graphics.rectangle("fill", -10000, -10000, 100000, 100000)
-					red = true
-				end
-
-				if musicTime > 124161 then
-					if wahooFade > 0 then wahooFade = wahooFade - 0.6 * delta end
-				end
-
-
-
+				enemy:draw()
+				boyfriend:draw()
 			love.graphics.pop()
 			love.graphics.push()
 				love.graphics.translate(cam.x * 1.1, cam.y * 1.1)
@@ -340,9 +219,10 @@ return {
 	end,
 
 	leave = function(self)
-		stageBack = nil
-		stageFront = nil
-		curtains = nil
+		bg = nil
+		cloud = nil
+		bush = nil
+		ground = nil
 
 		weeks:leave()
 	end

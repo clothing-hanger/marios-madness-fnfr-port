@@ -133,7 +133,6 @@ return {
 		combo = 0
 
 		enemy:animate("idle")
-		--enemyTwo = enemy     guglio wtf was this supposed to do
 		enemyTwo:animate("idle")
 		boyfriend:animate("idle")
 
@@ -539,30 +538,28 @@ return {
 	end,
 
 	bladeAttack = function(self)
-		if mechanics then
-			doingAttack = true
-			didAttack = false
-	
-			pow:animate("now", false)
-	
-			audio.playSound(sounds.powWarn.warn)
-	
-			Timer.after(
-				(60 / bpm),
-				function()
-					audio.playSound(sounds.powWarn.warn)
-					pow:animate("now", false)
-					Timer.after(
-						(60 / bpm),
-						function() 
-							doAttack = true
-							doingAttack = false
-	
-						end
-					)
-				end
-			)
-		end
+		doingAttack = true
+		didAttack = false
+
+		pow:animate("now", false)
+
+		audio.playSound(sounds.powWarn.warn)
+
+		Timer.after(
+			(60 / bpm),
+			function()
+				audio.playSound(sounds.powWarn.warn)
+				pow:animate("now", false)
+				Timer.after(
+					(60 / bpm),
+					function() 
+						doAttack = true
+						doingAttack = false
+
+					end
+				)
+			end
+		)
 	end,
 
 	-- Gross countdown script
@@ -820,7 +817,7 @@ return {
 					if combo >= 5 then self:safeAnimate(girlfriend, "sad", true, 1) end
 
 					combo = 0
-
+					misses = misses + 1
 					if settings.suddenDeath then
 						health = health - 1000
 					else
@@ -932,7 +929,6 @@ return {
 
 					score = score - 10
 					combo = 0
-					misses = misses + 1
 
 					if settings.suddenDeath then
 						health = health - 1000
@@ -1080,21 +1076,12 @@ return {
 				love.graphics.pop()
 			end
 
-			if mechanics then
-				if settings.downscroll then
-					love.graphics.scale(1, -1) -- now we flip the y-axis for downscroll users!
-				end
-				love.graphics.setColor(176 / 255, 0, 0)
-				lava:draw()
-				love.graphics.rectangle("fill", -1000, lavaFixed, 10000, 10000)
-				love.graphics.setColor(1, 1, 1)
-				lava:draw()
-				love.graphics.setColor(1, 1, 1)
-				if settings.downscroll then
-					love.graphics.scale(1, -1) -- now we put it back to normal to not fuck up the rest of the UI
-				end
-			end
-
+			love.graphics.setColor(176 / 255, 0, 0)
+			lava:draw()
+			love.graphics.rectangle("fill", -1000, lavaFixed, 10000, 10000)
+			love.graphics.setColor(1, 1, 1)
+			lava:draw()
+			love.graphics.setColor(1, 1, 1)
 
 			if not settings.suddenDeath then
 				if settings.downscroll then
