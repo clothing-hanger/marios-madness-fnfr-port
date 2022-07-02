@@ -71,6 +71,7 @@ return {
 		mario.x, mario.y = -500, 50
 		marioTwo.x, marioTwo.y = 500, 50
 		text.x, text.y = 525, -125
+		LayerZero.y = -200
 
 		boyfriend.sizeX, boyfriend.sizeY = 0.8, 0.8
 		enemy.sizeX, enemy.sizeY = 0.8, 0.8
@@ -179,7 +180,7 @@ return {
 				graphics.fadeOut(
 					0.5,
 					function()
-						Gamestate.switch(menu)
+						Gamestate.switch(songsMenu)
 
 						status.setLoading(false)
 					end

@@ -148,7 +148,7 @@ return {
 				graphics.fadeOut(
 					0.5,
 					function()
-						Gamestate.switch(menu)
+						Gamestate.switch(songsMenu)
 
 						status.setLoading(false)
 					end

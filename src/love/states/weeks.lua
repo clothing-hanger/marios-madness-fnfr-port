@@ -133,7 +133,21 @@ return {
 		combo = 0
 
 		enemy:animate("idle")
+
 		--enemyTwo = enemy     guglio wtf was this supposed to do
+
+		--nevermind sorry guglio i see what you were doing
+
+		--you did it wrong though
+
+		if weekNumber == "golden-land" then
+			enemyTwo = love.filesystem.load("sprites/golden-land/marioMad.lua")()
+			enemyTwo.sizeX, enemyTwo.sizeY = 2.5, 2.5
+			enemyTwo.x, enemyTwo.y = -380, -110
+		else
+			enemyTwo = enemy
+		end
+
 		enemyTwo:animate("idle")
 		boyfriend:animate("idle")
 
@@ -728,7 +742,7 @@ return {
 			doAttack = false
 		end
 
-		if input:pressed("dodge") then if boyfriend:getAnimName() ~= "dodge" then boyfriend:animate("dodge", false) end end
+		if input:pressed("dodge") then boyfriend:animate("dodge", false) end
 		
 
 		if musicThres ~= oldMusicThres and math.fmod(absMusicTime, 120000 / bpm) < 100 then
@@ -820,6 +834,7 @@ return {
 					if combo >= 5 then self:safeAnimate(girlfriend, "sad", true, 1) end
 
 					combo = 0
+					misses = misses + 1
 
 					if settings.suddenDeath then
 						health = health - 1000

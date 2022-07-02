@@ -21,7 +21,8 @@ function love.load()
 	local curOS = love.system.getOS()
 
 	simoc = false -- this is important :)
-	--               is it tho?
+	--               is it tho?  
+	--					YES GUGLIO, IT IS IMPORTANT
 	mechanics = true
 
 	
@@ -50,14 +51,29 @@ function love.load()
 	-- Load states
 	clickStart = require "states.click-start"
 	debugMenu = require "states.debug-menu"
-	menu = require "states.menu"
+	menu = require "states.menu"  -- old menu  not needed anymore      the shitty placeholder one
 	weeks = require "states.weeks"
 	weeksPixel = require "states.weeks-pixel"
 	menuCredits = require "states.menu-credits"
+	titleScreen = require "states.menu.menu"
+	weeksMenu = require "states.menu.menuWeek"
+	songsMenu = require "states.menu.songsMenu"
+
+
 
 	-- Load substates
 	gameOver = require "substates.game-over"
 	gameOverPixel = require "substates.game-over-pixel"
+
+	-- load songs as states
+	songItsAMe = require "weeks.its-a-me"
+	songGoldenLand = require "weeks.golden-land"
+	songIHateYou = require "weeks.i-hate-you"
+	songAlone =  require "weeks.alone"
+	songApparition = require "weeks.apparition"
+	songPowerdown = require "weeks.powerdown"
+	--songRacetraitors = require "weeks.racetraitors"
+
 
 	--load images
 	loadingScreen = graphics.newImage(love.graphics.newImage(graphics.imagePath("menu/loading")))
@@ -71,7 +87,7 @@ function love.load()
 		require "weeks.alone", --same 
 		require "weeks.apparition",
 		require "weeks.powerdown",
-		require "weeks.racetraitors"
+		--require "weeks.racetraitors"
 	}
 
 	-- LÖVE init
@@ -106,9 +122,9 @@ function love.load()
 	health = 0
 
 	if curOS == "Web" then
-		Gamestate.switch(clickStart)
+		Gamestate.switch(clickStart)  -- why is this even still here
 	else
-		Gamestate.switch(menu)
+		Gamestate.switch(titleScreen)
 	end
 end
 
