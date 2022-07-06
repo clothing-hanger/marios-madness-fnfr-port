@@ -79,11 +79,11 @@ return graphics.newSprite(
 		{x = 1967, y = 1506, width = 473, height = 789, offsetX = 0, offsetY = -19, offsetWidth = 473, offsetHeight = 808} -- 56: LuigiUp0009
 	},
 	{
-		["down"] = {start = 1, stop = 10, speed = 24, offsetX = 0, offsetY = 0},
-		["left"] = {start = 27, stop = 36, speed = 24, offsetX = 0, offsetY = 0},
-		["right"] = {start = 37, stop = 46, speed = 24, offsetX = 0, offsetY = 0},
-		["up"] = {start = 47, stop = 56, speed = 24, offsetX = 0, offsetY = 0},
-		["idle"] = {start = 11, stop = 26, speed = 24, offsetX = 0, offsetY = 0}
+		["down"] = {start = 1, stop = 10, speed = 24, offsetX = -58, offsetY = -118},
+		["left"] = {start = 27, stop = 36, speed = 24, offsetX = 38, offsetY = 16},
+		["right"] = {start = 37, stop = 46, speed = 24, offsetX = -98, offsetY = 13},
+		["up"] = {start = 47, stop = 56, speed = 24, offsetX = 15, offsetY = 44},
+		["idle"] = {start = 11, stop = 26, speed = 12, offsetX = 0, offsetY = 0}
 	},
 	"idle",
 	false

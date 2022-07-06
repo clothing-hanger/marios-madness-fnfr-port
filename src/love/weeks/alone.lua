@@ -64,19 +64,21 @@ return {
 			boyfriend = love.filesystem.load("sprites/simoc.lua")()
 		end
 		
-		enemy.x, enemy.y = -1380, -350
-		enemy.sizeX, enemy.sizeY = 0.9, 0.9
-		boyfriend.x, boyfriend.y = -735, -275
-		boyfriend.sizeX, boyfriend.sizeY = 0.8, 0.8
-		girlfriend.x, girlfriend.y = -1050, -425
-		girlfriend.sizeX, girlfriend.sizeY = 0.8, 0.8
-		LayerZero.x, LayerZero.y = -800, -300
+		enemy.x, enemy.y = -300, 10
+		enemy.sizeX, enemy.sizeY = 0.8, 0.8
+		boyfriend.x, boyfriend.y = 250, 80
+		boyfriend.sizeX, boyfriend.sizeY = 0.7, 0.7
+		girlfriend.x, girlfriend.y = 50, -100
+		girlfriend.sizeX, girlfriend.sizeY = 0.7, 0.7
+		LayerZero.x, LayerZero.y = 0, 0
 		LayerZero.sizeX, LayerZero.sizeY = 1.3, 1.3
-		rain.x, rain.y = -1000, -300
+		rain.x, rain.y = 0, 0
 		rain.sizeX, rain.sizeY = 1.5, 1.5
-		hang.x, hang.y = -710, -370
+		hang.x, hang.y = 250, -200
+		mansion.x, mansion.y = 1000, 300
 
-		enemyIcon:animate("daddy dearest", false)
+
+		enemyIcon:animate("alone", false)
 		rain:animate("anim", true)
 		hang:animate("anim", true)
 
@@ -109,12 +111,12 @@ return {
 		delta = love.timer.getDelta()
 	
 		if health >= 80 then
-			if enemyIcon:getAnimName() == "daddy dearest" then
-				enemyIcon:animate("daddy dearest losing", false)
+			if enemyIcon:getAnimName() == "alone" then
+				enemyIcon:animate("alone", false)
 			end
 		else
-			if enemyIcon:getAnimName() == "daddy dearest losing" then
-				enemyIcon:animate("daddy dearest", false)
+			if enemyIcon:getAnimName() == "alone" then
+				enemyIcon:animate("alone", false)
 			end
 		end
 
@@ -129,7 +131,7 @@ return {
 				graphics.fadeOut(
 					0.5,
 					function()
-						Gamestate.switch(menu)
+						Gamestate.switch(songsMenu)
 
 						status.setLoading(false)
 					end
@@ -247,6 +249,7 @@ return {
 			
 				love.graphics.setColor(1, 1, 1, 1)
 
+
 			love.graphics.pop()
 			love.graphics.push()
 				love.graphics.translate(cam.x * 1.1, cam.y * 1.1)
@@ -259,9 +262,12 @@ return {
 	end,
 
 	leave = function(self)
-		stageBack = nil
-		stageFront = nil
-		curtains = nil
+		LayerZero = nil
+		mansion = nil
+		hang = nil
+		rain = nil
+		lightning = nil
+
 
 		weeks:leave()
 	end

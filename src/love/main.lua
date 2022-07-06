@@ -21,7 +21,8 @@ function love.load()
 	local curOS = love.system.getOS()
 
 	simoc = false -- this is important :)
-
+	--               is it tho?  
+	--					YES GUGLIO, IT IS IMPORTANT
 	mechanics = true
 
 	
@@ -50,14 +51,35 @@ function love.load()
 	-- Load states
 	clickStart = require "states.click-start"
 	debugMenu = require "states.debug-menu"
-	menu = require "states.menu"
+	--menu = require "states.menu"  -- old menu  not needed anymore      the shitty placeholder one
 	weeks = require "states.weeks"
 	weeksPixel = require "states.weeks-pixel"
 	menuCredits = require "states.menu-credits"
+	titleScreen = require "states.menu.menu"
+	weeksMenu = require "states.menu.menuWeek"
+	songsMenu = require "states.menu.songsMenu"
+	powerdownControls = require "states.menu.controls"
+	shoulderWeeks = require "states.shoulderWeeks"
+	faceWeeks = require "states.faceWeeks"
+
+
 
 	-- Load substates
 	gameOver = require "substates.game-over"
 	gameOverPixel = require "substates.game-over-pixel"
+	apparitionGameOver = require "substates.apparitiongameover"
+
+	-- load songs as states
+	songItsAMe = require "weeks.its-a-me"
+	songGoldenLand = require "weeks.golden-land"
+	songIHateYou = require "weeks.i-hate-you"
+	songAlone =  require "weeks.alone"
+	songApparition = require "weeks.apparition"
+	songPowerdown = require "weeks.powerdown"  -- do not use
+	songPowerdownShoulderDodge = require "weeks.powerdownShoulder"
+	songPowerdownFaceDodge = require "weeks.powerdownFace"
+	--songRacetraitors = require "weeks.racetraitors"
+
 
 	--load images
 	loadingScreen = graphics.newImage(love.graphics.newImage(graphics.imagePath("menu/loading")))
@@ -71,7 +93,7 @@ function love.load()
 		require "weeks.alone", --same 
 		require "weeks.apparition",
 		require "weeks.powerdown",
-		require "weeks.racetraitors"
+		--require "weeks.racetraitors"
 	}
 
 	-- LÖVE init
@@ -85,6 +107,7 @@ function love.load()
 
 	-- Variables
 	font = love.graphics.newFont("fonts/vcr.ttf", 24)
+	marioFont = love.graphics.newFont("fonts/mario.ttf", 24)
 
 	weekNum = 1
 	songDifficulty = 2
@@ -106,9 +129,9 @@ function love.load()
 	health = 0
 
 	if curOS == "Web" then
-		Gamestate.switch(clickStart)
+		Gamestate.switch(clickStart)  -- why is this even still here
 	else
-		Gamestate.switch(menu)
+		Gamestate.switch(titleScreen)
 	end
 end
 
@@ -200,7 +223,7 @@ function love.draw()
 			love.graphics.setFont(font)
 
 			if status.getLoading() then
-				love.graphics.setColor(202 / 255, 1, 77 / 255)
+				love.graphics.setColor(96 / 255, 0, 0)
 				love.graphics.rectangle("fill", 0, 0, 1281, 721)
 				-- one pixel too large to piss off guglio lmfao
 				love.graphics.setColor(1, 1, 1)

@@ -143,12 +143,13 @@ return graphics.newSprite(
 		{x = 2885, y = 5331, width = 941, height = 837, offsetX = -6, offsetY = -2, offsetWidth = 947, offsetHeight = 839} -- 120: Wahoo0049
 	},
 	{
-		["down"] = {start = 1, stop = 14, speed = 24, offsetX = 32, offsetY = -8},
-		["left"] = {start = 31, stop = 43, speed = 24, offsetX = 59, offsetY = -4},
-		["right"] = {start = 44, stop = 56, speed = 24, offsetX = -24, offsetY = -4},
-		["up"] = {start = 57, stop = 70, speed = 24, offsetX = 13, offsetY = 9},
-		["idle"] = {start = 8, stop = 15, speed = 30, offsetX = 0, offsetY = 0},
-		["wahoo"] = {start = 77, stop = 120, speed = 30, offsetX = 0, offsetY = 0}
+		["down"] = {start = 1, stop = 14, speed = 24, offsetX = -195, offsetY = -40},
+		["left"] = {start = 31, stop = 43, speed = 24, offsetX = -234, offsetY = 12},
+		["right"] = {start = 44, stop = 56, speed = 24, offsetX = -245, offsetY = 12},
+		["up"] = {start = 57, stop = 70, speed = 24, offsetX = -59, offsetY = 59},
+		["idle"] = {start = 15, stop = 30, speed = 30, offsetX = 0, offsetY = 0},
+		["wahoo"] = {start = 77, stop = 120, speed = 30, offsetX = -212, offsetY = 12}
+	  --["jump"] = {start = 77, stop = 120, speed = 30, offsetX = -212, offsetY = 12} 
 	},
 	"idle",
 	false

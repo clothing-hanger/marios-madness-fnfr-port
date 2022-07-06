@@ -19,57 +19,38 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 local song, difficulty
 
-local stageBack, stageFront, curtains
+local LayerOne, LayerZero, text, boo, candle, candleOne, mario
 
 return {
 	enter = function(self, from, songNum, songAppend)
 		weeks:enter()
 
-		weekNumber = "i-hate-you"  -- haha just like how the marios madness devs hate me    why do they keep ignoring me 
---[[----------------------------------------------------------------------------
+		weekNumber = "i-hate-you" 
 
-none of this works and it was a huge waste of time
+		lavaHappened = {}
 
-i want to delete this port but i have spent too much time on it 
-
-
-		lavaOne = false
-		lavaTwo = false
-		lavaThree = false
-		lavaFour = false
-		lavaFive = false
-		lavaSix = false
-		lavaSeven = false
-		lavaEight = false
-		lavaNine = false
-		lavaTen = false
-		lavaEleven = false
-		lavaTwelve = false
-		lavaThirteen = false
-		lavaFourteen = false 
-		-- do not ask what happened to lavaFifteen
-		lavaSixteen = false
-		lavaSeventeen = false
-		lavaEighteen = false
-		lavaNinteen = false
-		lavaTwenty = false
-		lavaTwentyone = false
-		lavaTwentytwo = false
-		lavaTwentythree = false
-		lavaTwentyfour = false
-		lavaTwentyfive = false
-
+		for i = 1, 53 do
+			lavaHappened[i] = false
+		end
 		lavaIsUp = false
 		lavaIsUpAgain = false
-------------------------------------------------------------------------------]]
+		lavaNum = 0
+		IHYTextHasHappened = false
+
 		song = songNum
 		difficulty = songAppend
 
 		LayerZero = graphics.newImage(love.graphics.newImage(graphics.imagePath("i-hate-you/bg")))
-		LayerOne = graphics.newImage(love.graphics.newImage(graphics.imagePath("i-hate-you/floor")))
+		LayerOne = graphics.newImage(love.graphics.newImage(graphics.imagePath("i-hate-you/floor"))) -- I HATE THE FLOOR
 		text = graphics.newImage(love.graphics.newImage(graphics.imagePath("i-hate-you/text")))
+		light = graphics.newImage(love.graphics.newImage(graphics.imagePath("i-hate-you/light")))
+		love.graphics.setDefaultFilter("nearest")
+		start = graphics.newImage(love.graphics.newImage(graphics.imagePath("i-hate-you/hatestart")))
+		love.graphics.setDefaultFilter("linear")
 
 		boo = love.filesystem.load("sprites/i-hate-you/boo.lua")()
+		booOne = love.filesystem.load("sprites/i-hate-you/boo.lua")()
+		booTwo = love.filesystem.load("sprites/i-hate-you/boo.lua")()
 		candle = love.filesystem.load("sprites/i-hate-you/candle.lua")()
 		candleOne = love.filesystem.load("sprites/i-hate-you/candle.lua")()
 		mario = love.filesystem.load("sprites/i-hate-you/mario.lua")()
@@ -78,24 +59,94 @@ i want to delete this port but i have spent too much time on it
 		boyfriend = love.filesystem.load("sprites/i-hate-you/boyfriend.lua")()
 		girlfriend = love.filesystem.load("sprites/i-hate-you/girlfriend.lua")()
 		enemy = love.filesystem.load("sprites/i-hate-you/luigi.lua")()
-		enemyTwo = love.filesystem.load("sprites/i-hate-you/luigi.lua")()
 		if simoc then -- for if you play as simoc
 			fakeBoyfriend = love.filesystem.load("sprites/boyfriend.lua")() -- Used for game over
 			boyfriend = love.filesystem.load("sprites/simoc.lua")()
 		end
 		
-		girlfriend.x, girlfriend.y = 30, -90
-		enemy.x, enemy.y = -380, -110
-		boyfriend.x, boyfriend.y = 260, 100
-		mario.x, mario.y = -500, 50
-		marioTwo.x, marioTwo.y = 500, 50
+		girlfriend.x, girlfriend.y = 30, -50
+		enemy.x, enemy.y = -380, -20
+		boyfriend.x, boyfriend.y = 360, 100
+		mario.x, mario.y = -600, 60
+		marioTwo.x, marioTwo.y = 600, 60
+		text.x, text.y = 655, 50
+		text.sizeX, text.sizeY = 0.9, 0.9
+		LayerZero.y = -200
+		light.y = -70
 
-		enemyIcon:animate("daddy dearest", false)
+		light.sizeX = 5
+		light.sizeY = 5
+
+		boyfriend.sizeX, boyfriend.sizeY = 0.8, 0.8
+		enemy.sizeX, enemy.sizeY = 0.8, 0.8
+		girlfriend.sizeX, girlfriend.sizeY = 0.8, 0.8
+
+		boo.x, boo.y = -600, -175  -- left one
+		booOne.x, booOne.y = 300, -300  -- higher one
+		booTwo.x, booTwo.y = 340, -120  -- lower one
+
+		candle.x, candle.y = -550, -280 --left
+		candleOne.x, candleOne.y = 580, -280 --right
+
+		start.x = 270
+		start.sizeX, start.sizeY = 4, 4
+
+		boo.sizeX = -1
+
+
+		enemyIcon:animate("i hate you", false)
 		boo:animate("anim", true)
+		booOne:animate("anim", true)
+		booTwo:animate("anim", true)
 		candle:animate("anim", true)
 		candleOne:animate("anim", true)
 		mario:animate("empty", true)
 		marioTwo:animate("empty", true)
+
+
+		startSound = love.audio.newSource("sounds/i-hate-you/intro.ogg", "static")
+
+
+		booFade = 0
+
+
+		function IHYintro()
+			Timer.script(function(wait)
+				IHYIntroFade = 1
+				IHYFadeIntro = false
+				countingDown = true
+				lastReportedPlaytime = 0
+				musicTime = (240 / bpm) * -1000
+		
+				musicThres = 0
+				musicPos = 0
+				wait(0.2)
+				displayStart = true
+				startSound:play()
+
+
+				wait(1.3)
+				displayStart = false
+				wait(0.2)
+
+				countingDown = false
+				IHYFadeIntro = true
+
+				previousFrameTime = love.timer.getTime() * 1000
+				musicTime = 0
+
+				if inst then inst:play() end
+				voices:play()
+			end)
+		end
+
+		function tweenLight()
+			Timer.tween(1, light, {y = light.y - 70}, "in-out-quad", function()
+				Timer.tween(1, light, {y = light.y + 70}, "in-out-quad", function()
+					tweenLight()
+				end)
+			end)
+		end
 
 		self:load()
 	end,
@@ -110,7 +161,9 @@ i want to delete this port but i have spent too much time on it
 
 		self:initUI()
 
-		weeks:setupCountdown()
+		--weeks:setupCountdown()
+		IHYintro()
+		tweenLight()
 	end,
 
 	initUI = function(self)
@@ -123,31 +176,64 @@ i want to delete this port but i have spent too much time on it
 	update = function(self, dt)
 		weeks:update(dt)
 		boo:update(dt)
+		booOne:update(dt)
+		booTwo:update(dt)
 		candle:update(dt)
 		candleOne:update(dt)
 		mario:update(dt)
 		marioTwo:update(dt)
 
-		if musicTime >= 10000 then
+		if musicTime < 10000  then
+			mario:animate("empty", true)
+			marioTwo:animate("empty", true)
+		end
+
+		delta = love.timer.getDelta()
+
+		if IHYFadeIntro then
+			IHYIntroFade = IHYIntroFade - 0.9999 * delta
+		end
+
+		if musicTime >= 112857 then
 			if mario:getAnimName() == "empty" then
-				mario:animate("grab", true)
+				mario:animate("grab", false)
 			--	weeks:safeAnimate(mario, "grab")
 			end
-			if mario:getAnimName() == "empty" then
-				marioTwo:animate("grab", true)
-			--	weeks:safeAnimate(marioTwo, "grab")
+			if mario:getAnimName() == "grab" then
+				if not mario:isAnimated() then
+					mario:animate("idle", true)
+				end
+			end
+		end
+
+		if musicTime >= 115714 then
+			if marioTwo:getAnimName() == "empty" then
+				marioTwo:animate("grab", false)
+			end
+			if marioTwo:getAnimName() == "grab" then
+				if not marioTwo:isAnimated() then
+					marioTwo:animate("idle", true)
+				end
+			end
+		end
+
+		if musicTime > 98035 then
+			if not IHYTextHasHappened then
+				Timer.tween(0.1, text, {sizeX = 0.8, sizeY = 0.8}, "out-expo")
+				IHYTextHasHappened = true
 			end
 		end
 
 
+
 	
 		if health >= 80 then
-			if enemyIcon:getAnimName() == "daddy dearest" then
-				enemyIcon:animate("daddy dearest losing", false)
+			if enemyIcon:getAnimName() == "i hate you" then
+				enemyIcon:animate("i hate you losing", false)
 			end
 		else
-			if enemyIcon:getAnimName() == "daddy dearest losing" then
-				enemyIcon:animate("daddy dearest", false)
+			if enemyIcon:getAnimName() == "i hate you losing" then
+				enemyIcon:animate("i hate you", false)
 			end
 		end  
 
@@ -162,7 +248,7 @@ i want to delete this port but i have spent too much time on it
 				graphics.fadeOut(
 					0.5,
 					function()
-						Gamestate.switch(menu)
+						Gamestate.switch(songsMenu)
 
 						status.setLoading(false)
 					end
@@ -170,230 +256,462 @@ i want to delete this port but i have spent too much time on it
 			end
 		end
 
+		if musicTime > 81428.571 then
+			if booFade < 1 then
+				booFade = booFade + 0.95 * delta
+			end
+		end
+
 		--lava shit :sin:
 
 		if musicTime > 35714.285 then
 			if lava.y == 700 then
-				Timer.tween(0.2, lava, {x = lava.x, y = 500}, "linear")
+				Timer.tween(0.2, lava, {x = lava.x, y = 550}, "out-quad")
+				lavaNum = lavaNum + 1  -- lavaNum is just used for debugging and doesnt't really matter
 			end
 		end
 
+		if musicTime > 81428.571 then
+			if not lavaHappened[1] then
+				Timer.tween(0.2, lava, {x = lava.x, y = 500}, "out-quad")
+				lavaNum = lavaNum + 1
+				lavaHappened[1] = true
+			end
+		end
 
-
-
-
-
-
-
-
-	--	if musicTime > 81428.571 then
-	--		if not lavaOne then
-	--			Timer.tween(0.1, lava, {x = lava.x, y = 600}, "linear")
-	--			lavaOne = true
-	--		end
-	--	end
-
---[[
-
-		--if musicTime > 81785.714 then
-		--	if not lavaTwo then
-		--		Timer.tween(0.1, lava, {x = lava.x, y = 700}, "linear")
-		--		lavaTwo = true
-		--	end
-	--	end
+		if musicTime > 81785.714 then
+			if not lavaHappened[2] then
+				Timer.tween(0.2, lava, {x = lava.x, y = 600}, "out-quad")
+				lavaNum = lavaNum + 1
+				lavaHappened[2] = true
+			end
+		end
 
 		if musicTime > 82142.857 then
-			if not lavaThree then
-				Timer.tween(0.1, lava, {x = lava.x, y = 650}, "linear")
-				lavaThree = true
+			if not lavaHappened[3] then
+				Timer.tween(0.2, lava, {x = lava.x, y = 500}, "out-quad")
+				lavaNum = lavaNum + 1
+				lavaHappened[3] = true
 			end
 		end
 
-	--	if musicTime > 82500 then
-	--		if not lavaFour then
-	--			Timer.tween(0.1, lava, {x = lava.x, y = 700}, "linear")
-		--		lavaFour = true
-	--		end
-	--	end
+		if musicTime > 82500 then
+			if not lavaHappened[4] then
+				Timer.tween(0.2, lava, {x = lava.x, y = 600}, "out-quad")
+				lavaNum = lavaNum + 1
+				lavaHappened[4] = true
+			end
+		end
 
 		if musicTime > 82857.142 then
-			if not lavaFive then
-				Timer.tween(0.1, lava, {x = lava.x, y = 600}, "linear")
-				laveFive = true
+			if not lavaHappened[5] then
+				Timer.tween(0.2, lava, {x = lava.x, y = 500}, "out-quad")
+				lavaNum = lavaNum + 1
+				lavaHappened[5] = true
 			end
 		end
 
-	--	if musicTime > 83214.285 then
-	--		if not lavaSix then
-	--			Timer.tween(0.1, lava, {x = lava.x, y = 700}, "linear")
-	--			lavaSix = true
-	--		end
-	--	end
+		if musicTime > 83214.285 then
+			if not lavaHappened[6] then
+				Timer.tween(0.2, lava, {x = lava.x, y = 600}, "out-quad")
+				lavaNum = lavaNum + 1
+				lavaHappened[6] = true
+			end
+		end
 
 		if musicTime > 83571.428 then
-			if not lavaSeven then
-				Timer.tween(0.1, lava, {x = lava.x, y = 650}, "linear")
-				lavaSeven = true
+			if not lavaHappened[7] then
+				Timer.tween(0.2, lava, {x = lava.x, y = 500}, "out-quad")
+				lavaNum = lavaNum + 1
+				lavaHappened[7] = true
 			end
 		end
 
-	--	if musicTime > 83921.571 then
-	--		if not lavaEight then
-	--			Timer.tween(0.1, lava, {x = lava.x, y = 700}, "linear")
-	--			lavaEight = true
-	--		end
-	--	end
+		if musicTime > 83921.571 then
+			if not lavaHappened[8] then
+				Timer.tween(0.2, lava, {x = lava.x, y = 600}, "out-quad")
+				lavaNum = lavaNum + 1
+				lavaHappened[8] = true
+			end
+		end
 
 		if musicTime > 84285.714 then
-			if not lavaNine then
-				Timer.tween(0.1, lava, {x = lava.x, y = 600}, "linear")
-				lavaNine = true
+			if not lavaHappened[9] then
+				Timer.tween(0.2, lava, {x = lava.x, y = 500}, "out-quad")
+				lavaNum = lavaNum + 1
+				lavaHappened[9] = true
 			end
 		end
 
-	--	if musicTime > 84642.857 then
-	--		if not lavaTen then
-	--			Timer.tween(0.1, lava, {x = lava.x, y = 700}, "linear")
-	--			lavaTen = true
-	--		end
-	--	end
+		if musicTime > 84642.857 then
+			if not lavaHappened[10] then
+				Timer.tween(0.2, lava, {x = lava.x, y = 600}, "out-quad")
+				lavaNum = lavaNum + 1
+				lavaHappened[10] = true
+			end
+		end
 
 		if musicTime > 85000 then
-			if not lavaEleven then
-				Timer.tween(0.1, lava, {x = lava.x, y = 650}, "linear")
-				lavaEleven = true
+			if not lavaHappened[11] then
+				Timer.tween(0.2, lava, {x = lava.x, y = 500}, "out-quad")
+				lavaNum = lavaNum + 1
+				lavaHappened[11] = true
 			end
 		end
 
---		if musicTime > 85357.142 then
---			if not lavaTwelve then
---				Timer.tween(0.1, lava, {x = lava.x, y = 700}, "linear")
---				lavaTwelve = true
---			end
---		end
+		if musicTime > 85357.142 then
+			if not lavaHappened[12] then
+				Timer.tween(0.2, lava, {x = lava.x, y = 600}, "out-quad")
+				lavaNum = lavaNum + 1
+				lavaHappened[12] = true
+			end
+		end
 
 		if musicTime > 85714.285 then
-			if not lavaThirteen then
-				Timer.tween(0.1, lava, {x = lava.x, y = 600}, "linear")
-				lavaThirteen = true
+			if not lavaHappened[13] then
+				Timer.tween(0.2, lava, {x = lava.x, y = 500}, "out-quad")
+				lavaNum = lavaNum + 1
+				lavaHappened[13] = true
 			end
 		end
 
---		if musicTime > 86071.428 then
---			if not lavaFourteen then
---				Timer.tween(0.1, lava, {x = lava.x, y = 700}, "linear")
---				lavaFourteen = true
---			end
---		end
+		if musicTime > 86071.428 then
+			if not lavaHappened[14] then
+				Timer.tween(0.2, lava, {x = lava.x, y = 600}, "out-quad")
+				lavaNum = lavaNum + 1
+				lavaHappened[14] = true
+			end
+		end
 
 		if musicTime > 86428.571 then
-			if not lavaSixteen then
-				Timer.tween(0.1, lava, {x = lava.x, y = 650}, "linear")
-				lavaSixteen = true
+			if not lavaHappened[15] then
+				Timer.tween(0.2, lava, {x = lava.x, y = 500}, "out-quad")
+				lavaNum = lavaNum + 1
+				lavaHappened[15] = true
 			end
 		end
 
---		if musicTime > 86785.714 then
---			if not lavaSeventeen then
---				Timer.tween(0.1, lava, {x = lava.x, y = 700}, "linear")
---				lavaSeventeen = true
---			end
---		end
+		if musicTime > 86785.714 then
+			if not lavaHappened[16] then
+				Timer.tween(0.2, lava, {x = lava.x, y = 600}, "out-quad")
+				lavaNum = lavaNum + 1
+				lavaHappened[16] = true
+			end
+		end
 
 		if musicTime > 87142.857 then
-			if not lavaEighteen then
-				Timer.tween(0.1, lava, {x = lava.x, y = 600}, "linear")
-				lavaEighteen = true
+			if not lavaHappened[17] then
+				Timer.tween(0.2, lava, {x = lava.x, y = 500}, "out-quad")
+				lavaNum = lavaNum + 1
+				lavaHappened[17] = true
 			end
 		end
 
---		if musicTime > 87500 then
---			if not lavaNinteen then
---				Timer.tween(0.1, lava, {x = lava.x, y = 700}, "linear")
---				lavaNinteen = true
---			end
---		end
+		if musicTime > 87500 then
+			if not lavaHappened[18] then
+				Timer.tween(0.2, lava, {x = lava.x, y = 600}, "out-quad")
+				lavaNum = lavaNum + 1
+				lavaHappened[18] = true
+			end
+		end
 
 		if musicTime > 87857.142 then
-			if lavaTwenty then
-				Timer.tween(0.1, lava, {x = lava.x, y = 650}, "linear")
-				lavaTwenty = true
+			if lavaHappened[19] then
+				Timer.tween(0.2, lava, {x = lava.x, y = 500}, "out-quad")
+				lavaNum = lavaNum + 1
+				lavaHappened[19] = true
 			end
 		end
 
---		if musicTime > 88214.285 then
---			if not lavaTwentyone then
---				Timer.tween(0.1, lava, {x = lava.x, y = 700}, "linear")
---				lavaTwentyone = true
---			end
---		end
+		if musicTime > 88214.285 then
+			if not lavaHappened[20] then
+				Timer.tween(0.2, lava, {x = lava.x, y = 600}, "out-quad")
+				lavaNum = lavaNum + 1
+				lavaHappened[20] = true
+			end
+		end
+
+
+
+		--wtf
 
 		if musicTime > 88571.428 then
-			if not lavaTwentytwo then
-				Timer.tween(0.1, lava, {x = lava.x, y = 600}, "linear")
-				lavaTwentytwo = true
+			if not lavaHappened[21] then
+				Timer.tween(0.2, lava, {x = lava.x, y = 500}, "out-quad")
+				lavaNum = lavaNum + 1
+				lavaHappened[21] = true
 			end
 		end
 
---		if musicTime > 88928.571 then
---			if not lavaTwentythree then
---				Timer.tween(0.1, lava, {x = lava.x, y = 700}, "linear")
---				lavaTwentythree = true
---			end
---		end
+		--that one seems delayed
+		--i blame guglio it's his fault
+
+		
+		if musicTime > 88928.571 then
+			if not lavaHappened[22] then
+				Timer.tween(0.2, lava, {x = lava.x, y = 600}, "out-quad")
+				lavaNum = lavaNum + 1
+				lavaHappened[22] = true
+			end
+		end
 
 		if musicTime > 89285 then
-			if not lavaTwentyfour then
-				Timer.tween(0.1, lava, {x = lava.x, y = 650}, "linear")
-				lavaTwentyfour = true
+			if not lavaHappened[23] then
+				Timer.tween(0.2, lava, {x = lava.x, y = 500}, "out-quad")
+				lavaNum = lavaNum + 1
+				lavaHappened[23] = true
 			end
 		end
 
---		if musicTime > 89642 then
---			if not lavaTwentyfive then
---				Timer.tween(0.1, lava, {x = lava.x, y = 700}, "linear")
---				lavaTwentyfive = true
---			end
---		end
-
---]]  
---[[
-	if musicTime > 98571.42 then
-		if lava.y == 500 then
-			Timer.tween(5, lava, {x = lava.x, y = -40}, "linear")
-			lavaIsUp = true
+		if musicTime > 89642 then
+			if not lavaHappened[24] then
+				Timer.tween(0.2, lava, {x = lava.x, y = 600}, "out-quad")
+				lavaNum = lavaNum + 1
+				lavaHappened[24] = true
+			end
 		end
-	end
 
-	if musicTime > 110000 then
-		if lavaIsUp then
-			lavaIsUp = false
-			Timer.tween(2.857, lava, {x = lava.x, y = 601}, "linear")
+		-- new ones start here
+
+
+		if musicTime > 90000 then
+			if not lavaHappened[25] then
+				Timer.tween(0.2, lava, {x = lava.x, y = 500}, "out-quad")
+				lavaNum = lavaNum + 1
+				lavaHappened[25] = true
+			end
 		end
-	end
 
-	--if musicTime > 121428.571 then
-	--	if lava.y == -601 then
-	--		Timer.tween(5.714, lava, {x = lava.x, y = -41}, "linear")
-	--	end
-	--end
-
-	if musicTime > 121428.571 then
-		if not lavaIsUp then
-			lavaIsUpAgain = true
-			Timer.tween(4.286, lava, {x = lava.x, y = -41}, "linear")
+		if musicTime > 90357 then
+			if not lavaHappened[26] then
+				Timer.tween(0.2, lava, {x = lava.x, y = 600}, "out-quad")
+				lavaNum = lavaNum + 1
+				lavaHappened[26] = true
+			end
 		end
-	end
 
-	--if musicTime > 127142.857 then
-	--	if lavaIsUpAgain then
-	--		lavaIsUpAgain = false
-	--		Timer.tween(0.2, lava, {x = lava.x, y = 500}, "linear")
-	--	end
-	--end
-	--]]  
+		if musicTime > 90714 then
+			if not lavaHappened[27] then
+				Timer.tween(0.2, lava, {x = lava.x, y = 500}, "out-quad")
+				lavaNum = lavaNum + 1
+				lavaHappened[27] = true
+			end
+		end
+
+		if musicTime > 91071 then
+			if not lavaHappened[28] then
+				Timer.tween(0.2, lava, {x = lava.x, y = 600}, "out-quad")
+				lavaNum = lavaNum + 1
+				lavaHappened[28] = true
+			end
+		end
+
+		if musicTime > 91428 then
+			if not lavaHappened[29] then
+				Timer.tween(0.2, lava, {x = lava.x, y = 500}, "out-quad")
+				lavaNum = lavaNum + 1
+				lavaHappened[29] = true
+			end
+		end
+
+		if musicTime > 91785 then
+			if not lavaHappened[30] then
+				Timer.tween(0.2, lava, {x = lava.x, y = 600}, "out-quad")
+				lavaNum = lavaNum + 1
+				lavaHappened[30] = true
+			end
+		end
+
+		if musicTime > 92142 then
+			if not lavaHappened[31] then
+				Timer.tween(0.2, lava, {x = lava.x, y = 500}, "out-quad")
+				lavaNum = lavaNum + 1
+				lavaHappened[31] = true
+			end
+		end
+
+		if musicTime > 92500 then
+			if not lavaHappened[32] then
+				Timer.tween(0.2, lava, {x = lava.x, y = 600}, "out-quad")
+				lavaNum = lavaNum + 1
+				lavaHappened[32] = true
+			end
+		end
+
+		if musicTime > 92857 then
+			if not lavaHappened[33] then
+				Timer.tween(0.2, lava, {x = lava.x, y = 500}, "out-quad")
+				lavaNum = lavaNum + 1
+				lavaHappened[33] = true
+			end
+		end
+
+		if musicTime > 93214 then
+			if not lavaHappened[34] then
+				Timer.tween(0.2, lava, {x = lava.x, y = 600}, "out-quad")
+				lavaNum = lavaNum + 1
+				lavaHappened[34] = true
+			end
+		end
+
+		if musicTime > 93571 then
+			if not lavaHappened[35] then
+				Timer.tween(0.2, lava, {x = lava.x, y = 500}, "out-quad")
+				lavaNum = lavaNum + 1
+				lavaHappened[35] = true
+			end
+		end
+
+		if musicTime > 93928 then
+			if not lavaHappened[36] then
+				Timer.tween(0.2, lava, {x = lava.x, y = 600}, "out-quad")
+				lavaNum = lavaNum + 1
+				lavaHappened[36] = true
+			end
+		end
+
+		if musicTime > 94285 then
+			if not lavaHappened[37] then
+				Timer.tween(0.2, lava, {x = lava.x, y = 500}, "out-quad")
+				lavaNum = lavaNum + 1
+				lavaHappened[37] = true
+			end
+		end
+
+		if musicTime > 94642 then
+			if not lavaHappened[38] then
+				Timer.tween(0.2, lava, {x = lava.x, y = 600}, "out-quad")
+				lavaNum = lavaNum + 1
+				lavaHappened[38] = true
+			end
+		end
+
+		if musicTime > 95000 then
+			if not lavaHappened[39] then
+				Timer.tween(0.2, lava, {x = lava.x, y = 500}, "out-quad")
+				lavaNum = lavaNum + 1
+				lavaHappened[39] = true
+			end
+		end
+
+		if musicTime > 95357 then
+			if not lavaHappened[40] then
+				Timer.tween(0.2, lava, {x = lava.x, y = 600}, "out-quad")
+				lavaNum = lavaNum + 1
+				lavaHappened[40] = true
+			end
+		end
+
+		if musicTime > 95714 then
+			if not lavaHappened[41] then
+				Timer.tween(0.2, lava, {x = lava.x, y = 500}, "out-quad")
+				lavaNum = lavaNum + 1
+				lavaHappened[41] = true
+			end
+		end
+
+		if musicTime > 96071 then
+			if not lavaHappened[42] then
+				Timer.tween(0.2, lava, {x = lava.x, y = 600}, "out-quad")
+				lavaNum = lavaNum + 1
+				lavaHappened[42] = true
+			end
+		end
+
+		if musicTime > 96428 then
+			if not lavaHappened[43] then
+				Timer.tween(0.2, lava, {x = lava.x, y = 500}, "out-quad")
+				lavaNum = lavaNum + 1
+				lavaHappened[43] = true
+			end
+		end
+
+		if musicTime > 96785 then
+			if not lavaHappened[44] then
+				Timer.tween(0.2, lava, {x = lava.x, y = 600}, "out-quad")
+				lavaNum = lavaNum + 1
+				lavaHappened[44] = true
+			end
+		end
+
+		if musicTime > 97142 then
+			if not lavaHappened[45] then
+				Timer.tween(0.2, lava, {x = lava.x, y = 500}, "out-quad")
+				lavaNum = lavaNum + 1
+				lavaHappened[45] = true
+			end
+		end
+
+		if musicTime > 97500 then
+			if not lavaHappened[46] then
+				Timer.tween(0.2, lava, {x = lava.x, y = 600}, "out-quad")
+				lavaNum = lavaNum + 1
+				lavaHappened[46] = true
+			end
+		end
+
+		if musicTime > 97857 then
+			if not lavaHappened[47] then
+				Timer.tween(0.2, lava, {x = lava.x, y = 500}, "out-quad")
+				lavaNum = lavaNum + 1
+				lavaHappened[47] = true
+			end
+		end
+
+		if musicTime > 98035 then
+			if not lavaHappened[48] then
+				Timer.tween(0.2, lava, {x = lava.x, y = 600}, "out-quad")
+				lavaNum = lavaNum + 1
+				lavaHappened[48] = true
+			end
+		end
+
+		if musicTime > 98214 then
+			if not lavaHappened[49] then
+				Timer.tween(0.2, lava, {x = lava.x, y = 500}, "out-quad")
+				lavaNum = lavaNum + 1
+				lavaHappened[49] = true
+			end
+		end
 
 
+		--old ones start here
+
+		if musicTime > 98571.42 then
+			if not lavaHappened[50] then
+				Timer.tween(8, lava, {x = lava.x, y = 250}, "out-quad")
+				lavaNum = lavaNum + 1
+				lavaHappened[50] = true
+			end
+		end
+
+		if musicTime > 110000 then
+			if not lavaHappened[51] then
+				Timer.tween(2, lava, {x = lava.x, y = 500}, "out-quad")
+				lavaNum = lavaNum + 1
+			end
+			lavaHappened[51] = true
+		end
+
+		if musicTime > 121428.571 then
+			if not lavaHappened[52] then
+				Timer.tween(5.5, lava, {x = lava.x, y = 250}, "out-quad")
+				lavaNum = lavaNum + 1
+				lavaHappened[52] = true
+			end
+		end
+
+		if musicTime > 127142.857 then
+			if not lavaHappened[53] then
+				Timer.tween(0.7, lava, {x = lava.x, y = 1000}, "out-quad")
+				lavaNum = lavaNum + 1
+				lavaHappened[53] = true
+			end
+		end
+
+		--]]
+
+		
 
 		weeks:updateUI(dt)
 	end,
@@ -408,10 +726,22 @@ i want to delete this port but i have spent too much time on it
 				
 
 				LayerZero:draw()
-				boo:draw()
-				text:draw()
+				
+
 				candle:draw()
 				candleOne:draw()
+
+				love.graphics.setColor(1, 1, 1, booFade)
+				boo:draw()
+				booOne:draw()
+				booTwo:draw()
+				love.graphics.setColor(1, 1, 1)
+
+				if IHYTextHasHappened then
+					text:draw()
+				end
+				light:draw()
+
 			--	love.graphics.setColor(0, 0, 0, 0)
 
 			love.graphics.pop()
@@ -419,11 +749,33 @@ i want to delete this port but i have spent too much time on it
 				love.graphics.translate(cam.x, cam.y)
 
 				LayerOne:draw()
+
+				--[[
+				for i = -500, 500, 1000 do  -- guglio why
+					mario.x = i
+					mario:draw()
+				end
+
+				--]]
 				mario:draw()
 				marioTwo:draw()
+				girlfriend:draw()
 
 				enemy:draw()
 				boyfriend:draw()
+
+
+				love.graphics.setColor(0, 0, 0, IHYIntroFade)
+				love.graphics.rectangle("fill", -2000, -2000, 10000, 100000)
+				
+				love.graphics.setColor(1, 1, 1, IHYIntroFade)
+				if displayStart then
+					start:draw()
+				end
+
+				
+				love.graphics.setColor(1, 1, 1, 1)
+
 			love.graphics.pop()
 			love.graphics.push()
 				love.graphics.translate(cam.x * 1.1, cam.y * 1.1)
@@ -433,13 +785,21 @@ i want to delete this port but i have spent too much time on it
 			weeks:drawRating(0.9)
 		love.graphics.pop()
 
-		weeks:drawUI()
+		if not countingDown then
+			weeks:drawUI()
+		end
+
+		--weeks:drawUI()
 	end,
 
 	leave = function(self)
-		stageBack = nil
-		stageFront = nil
-		curtains = nil
+		mario = nil
+		boo = nil
+		text = nil
+		candle = nil
+		candleOne = nil
+		LayerZero = nil
+		LayerOne = nil
 
 		weeks:leave()
 	end

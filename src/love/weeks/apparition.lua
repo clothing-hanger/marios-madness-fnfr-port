@@ -25,7 +25,7 @@ return {
 	enter = function(self, from, songNum, songAppend)
 		weeks:enter()
 
-		fading = 0
+		fadingApparition = 0           --get/in/the/corner/;]
 		redThingExists = true
 		cameraZoom = 1
 		redThingSize = 1
@@ -57,6 +57,7 @@ return {
 		bodyOne.x = -100
 		boyfriend.x, boyfriend.y = -90, 280
 		enemy.x, enemy.y = -130, 60
+		enemy.sizeX, enemy.sizeY = 0, 0
 
 		bg.x, bg.y = -85, 110
 		redThing.x, redThing.y = -105, 160
@@ -65,7 +66,7 @@ return {
 
 		bodyTwo.x, bodyTwo.y = bodyOne.x, bodyOne.y -- ok fine guglio i will do it this way
 
-		enemyIcon:animate("daddy dearest", false)
+		enemyIcon:animate("apparition", false)
 		bodyOne:animate("anim", true)
 		bodyTwo:animate("anim", true)
 		bg:animate("anim", true)
@@ -97,27 +98,71 @@ return {
         bodyTwo:update(dt)
         bg:update(dt)
         redThing:update(dt)
-       -- boyfriendTwo:update(dt)
+	
+		--if spriteTimer == 1 then
+		--	Timer.tween(0.2, boyfriend, {x = boyfriend.x, y = 287}, "out-quad")
+		--elseif spriteTimer == 4 then
+		--	if not boyfriend.y == 208 then
+		--		Timer.tween(1, boyfriend, {x = boyfriend.x, y = 280}, "out-quad")
+		--	end
+		--end
 
-       -- if boyfriend:getAnimName() == "left" then
-        --    boyfriendTwo:animate("left", true)
-       -- elseif boyfriend:getAnimName() == "left miss" then
-       --     boyfriendTwo:animate("left", true)
-       -- elseif boyfriend:getAnimName() == "right" then
-      --      boyfriendTwo:animate("right", true)
-      --  elseif boyfriend:getAnimName() == "right miss" then
-         --   boyfriendTwo:animate("right", true)
-      --  elseif boyfriend:getAnimName() == "down" then
-       --     boyfriendTwo:animate("down", true)
-      --  elseif boyfriend:getAnimName() == "down miss" then
-        --    boyfriendTwo:animate("down", true)
-       -- elseif boyfriend:getAnimName() == "up" then
-        --    boyfriendTwo:animate("up", true)
-       -- elseif boyfriend:getAnimName() == "up miss" then
-       --     boyfriendTwo:animate("up", true)
-       -- elseif boyfriend:getAnimName() == "idle" then
-      --      boyfriendTwo:animate("idle", false)
-      --  end
+		if health >= 80 then
+			if enemyIcon:getAnimName() == "apparition" then
+				enemyIcon:animate("apparition losing", false)
+			end
+		else
+			if enemyIcon:getAnimName() == "apparition losing" then
+				enemyIcon:animate("apparition", false)
+			end
+		end
+
+		if musicThres ~= oldMusicThres and math.fmod(absMusicTime, 60000 / bpm) < 100 then  -- thanks HTV for this code i stole it from the icon bop lmao
+            if boyfriendHeadBop then Timer.cancel(boyfriendHeadBop) end
+
+            boyfriendHeadBop = Timer.tween(0.05, boyfriend, {x = boyfriend.x, y = boyfriend.y + 7}, "out-expo", 
+                function() 
+                    Timer.after(
+                        (60 / bpm) / 16,
+                        function()
+                            boyfriendHeadBop = Timer.tween(0.05, boyfriend, {x = boyfriend.x, y = boyfriend.y - 7}, "out-expo") 
+                        end
+                    )
+                end
+            )
+        end
+
+		if musicThres ~= oldMusicThres and math.fmod(absMusicTime, 60000 / bpm) < 100 then  -- thanks HTV for this code i stole it from the icon bop lmao
+            if enemyHeadBop then Timer.cancel(enemyHeadBop) end
+
+            enemyHeadBop = Timer.tween(0.05, enemy, {x = enemy.x, y = enemy.y + 7}, "out-expo", 
+                function() 
+                    Timer.after(
+                        (60 / bpm) / 16,
+                        function()
+                            enemyHeadBop = Timer.tween(0.05, enemy, {x = enemy.x, y = enemy.y - 7}, "out-expo") 
+                        end
+                    )
+                end
+            )
+        end
+
+		--[[   uncomment this for funny
+
+		if musicTime < 0 and enemy.sizeX ~= 0 then
+			enemy.sizeX = 0
+			enemy.sizeY = 0
+		end
+
+		--]]
+
+			
+
+		if musicTime < 0 then
+			if enemy.sizeX == 0 then
+				Timer.tween(3, enemy, {sizeX = 1, sizeY = 1}, "out-expo")
+			end
+		end
 
 		if not (countingDown or graphics.isFading()) and not (inst:isPlaying() and voices:isPlaying()) then
 			status.setLoading(true)
@@ -125,8 +170,8 @@ return {
 			graphics.fadeOut(
 				0.5,
 				function()
-					Gamestate.switch(menu)
-
+					Gamestate.switch(songsMenu)
+					
 					status.setLoading(false)
 				end
 			)
@@ -153,14 +198,16 @@ return {
 				bodyOne:draw()
 				bodyTwo:draw()
 				boyfriend:draw()
-				--redThing:draw()
-			--	boyfriendTwo:draw()
 
 				if musicTime >= 38709 then
-					graphics.setColor(1, 1, 1, fading)
-					fading = fading + 0.015
+					graphics.setColor(1, 1, 1, fadingApparition)
+					fadingApparition = fadingApparition + 0.0015
 					redThingSize = redThingSize - 0.0004
-				--	cameraZoom = cameraZoom + 0.0008
+
+					--graphics.setColor(1, 0, 0, fadingApparition)
+					--love.graphics.rectangle("fill", -10000, -10000, 100000, 100000)
+					--love.graphics.setColor(1, 1, 1, fadingApparition)
+
 
 					cam.sizeX, cam.sizeY = cameraZoom, cameraZoom
 					camScale.x, camScale.y = cameraZoom, cameraZoom

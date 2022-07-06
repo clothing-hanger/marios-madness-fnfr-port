@@ -33,6 +33,8 @@ return {
 		song = songNum
 		difficulty = songAppend
 
+		love.graphics.setDefaultFilter("nearest")
+
 		LayerZero = graphics.newImage(love.graphics.newImage(graphics.imagePath("golden-land/BG")))
 		LayerZero.sizeX, LayerZero.sizeY = 2.5, 2.5
 		LayerOne = graphics.newImage(love.graphics.newImage(graphics.imagePath("golden-land/water")))
@@ -76,9 +78,32 @@ return {
 		LayerOne.y = 200
 		LayerOneDark.y = 200
 
-		enemyIcon:animate("daddy dearest", false)
+		--love.graphics.setDefaultFilter("linear")
+
+		enemyIcon:animate("golden land", false)
+		boyfriendIcon:animate("golden land bf", false)
 		static:animate("anim", true)
 		fakeGirlfriend:animate("idle", true)
+
+		function goldenLandIntro()
+			Timer.script(function(wait)
+				countingDown = true
+				wait(10)
+				lastReportedPlaytime = 0
+				musicTime = (240 / bpm) * -1000
+		
+				musicThres = 0
+				musicPos = 0
+
+				countingDown = false
+
+				previousFrameTime = love.timer.getTime() * 1000
+				musicTime = 0
+
+				if inst then inst:play() end
+				voices:play()
+			end)
+		end
 
 		self:load()
 	end,
@@ -91,6 +116,7 @@ return {
 
 		self:initUI()
 
+		--goldenLandIntro()
 		weeks:setupCountdown()
 	end,
 
@@ -111,25 +137,27 @@ return {
 		--cam.x, cam.y = -fakeGirlfriend.x, -fakeGirlfriend.y
 
 		if health >= 80 then
-			if enemyIcon:getAnimName() == "daddy dearest" then
-				enemyIcon:animate("daddy dearest losing", false)
+			if musicTime > 43772 then
+				if enemyIcon:getAnimName() == "golden land" then
+					enemyIcon:animate("golden land losing", false)
+				end
 			end
 		else
-			if enemyIcon:getAnimName() == "daddy dearest losing" then
-				enemyIcon:animate("daddy dearest", false)
+			if enemyIcon:getAnimName() == "golden land losing" then
+				enemyIcon:animate("golden land", false)
 			end
 		end
 
 		if musicTime > 67221.3353 then
 			if fakeGirlfriend.y == 500 then
 				Timer.tween(0.8, fakeGirlfriend, {x = fakeGirlfriend.x, y = -90}, "out-sine")
-				Timer.tween(0.2, cam, {x = cam.x - 95, y = cam.y + 95}, "in-out-elastic")
+			--	Timer.tween(0.2, cam, {x = cam.x - 95, y = cam.y + 95}, "in-out-elastic")
 			end
 		end
 		
 		if musicTime > 43773.06 then
 			if musicTime < 43816.162 then
-				Timer.tween(0.2, cam, {x = cam.x - 35, y = cam.y + 35}, "in-out-elastic")
+			--	Timer.tween(0.2, cam, {x = cam.x - 35, y = cam.y + 35}, "in-out-elastic")
 			end
 		end
 			
@@ -147,7 +175,7 @@ return {
 				graphics.fadeOut(
 					0.5,
 					function()
-						Gamestate.switch(menu)
+						Gamestate.switch(songsMenu)
 
 						status.setLoading(false)
 					end
@@ -177,10 +205,10 @@ return {
 				if musicTime > 43772 then
 					static:draw()
 					LayerTwo:draw()
-					fakeGirlfriend:draw()
 				--	love.graphics.setColor(1, 1, 1, 0.3)
 				--	love.graphics.rectangle("fill", -1000, -1000, 10000, 10000)
 					LayerOneDark:draw()
+					fakeGirlfriend:draw()
 					love.graphics.setColor(127 / 255, 127 / 255, 127 / 255)
 					love.graphics.rectangle("fill", -2000, 210, 10000, 10000)
 					love.graphics.setColor(1, 1, 1)

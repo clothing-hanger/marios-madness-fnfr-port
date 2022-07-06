@@ -29,13 +29,27 @@ if settings.dfjk then
 				back = {"button:a", "key:escape"},
 				simoc = {"key:s"},
 				mechanicsInput = {"key:m"},
-				dodge = {"key:space", "button:leftstick"},
+				dodge = {"key:space", "button:leftstick"},  -- do not use this one
+				faceButtonDodge = {"key:space", "button:a", "button:b", "button:x", "button:y", "button:dpup", "button:dpdown", "button:dpleft", "button:dpright"},
+				shoulderButtonDodge = {"key:space", "axis:triggerleft+", "button:leftshoulder", "axis:triggerright+", "button:rightshoulder"},
 	
 				gameLeft = {"axis:triggerleft+", "axis:leftx-", "axis:rightx-", "button:dpleft", "button:x", "key:d", "key:left"},
 				gameDown = {"axis:lefty+", "axis:righty+", "button:leftshoulder", "button:dpdown", "button:a", "key:f", "key:down"},
 				gameUp = {"axis:lefty-", "axis:righty-", "button:rightshoulder", "button:dpup", "button:y", "key:j", "key:up"},
 				gameRight = {"axis:triggerright+", "axis:leftx+", "axis:rightx+", "button:dpright", "button:b", "key:k", "key:right"},
 				gameBack = {"button:start", "key:escape"},
+
+				shoulderGameLeft = {"axis:triggerleft+", "axis:leftx-", "axis:rightx-", "key:d", "key:left"},
+				shoulderGameDown = {"axis:lefty+", "axis:righty+", "button:leftshoulder", "key:f", "key:down"},
+				shoulderGameUp = {"axis:lefty-", "axis:righty-", "button:rightshoulder", "key:j", "key:up"},
+				shoulderGameRight = {"axis:triggerright+", "axis:leftx+", "axis:rightx+", "key:k", "key:right"},
+				shoulderGameBack = {"button:start", "key:escape"},
+
+				faceGameLeft = {"axis:leftx-", "axis:rightx-", "button:dpleft", "button:x", "key:d", "key:left"},
+				faceGameDown = {"axis:lefty+", "axis:righty+", "button:dpdown", "button:a", "key:f", "key:down"},
+				faceGameUp = {"axis:lefty-", "axis:righty-", "button:dpup", "button:y", "key:j", "key:up"},
+				faceGameRight = {"axis:leftx+", "axis:rightx+", "button:dpright", "button:b", "key:k", "key:right"},
+				faceGameBack = {"button:start", "key:escape"},
 			},
 			joystick = love.joystick.getJoysticks()[1]
 		}
@@ -51,12 +65,26 @@ if settings.dfjk then
 				simoc = {"key:s"},
 				mechanicsInput = {"key:m"},
 				dodge = {"key:space", "button:leftstick"},
+				faceButtonDodge = {"key:space", "button:a", "button:b", "button:x", "button:y", "button:dpup", "button:dpdown", "button:dpleft", "button:dpright"},
+				shoulderButtonDodge  = {"key:space", "axis:triggerleft+", "button:leftshoulder", "axis:triggerright+", "button:rightshoulder"},
 	
 				gameLeft = {"key:d", "key:left", "axis:triggerleft+", "axis:leftx-", "axis:rightx-", "button:dpleft", "button:x"},
 				gameDown = {"key:f", "key:down", "axis:lefty+", "axis:righty+", "button:leftshoulder", "button:dpdown", "button:a"},
 				gameUp = {"key:j", "key:up", "axis:lefty-", "axis:righty-", "button:rightshoulder", "button:dpup", "button:y"},
 				gameRight = {"key:k", "key:right", "axis:triggerright+", "axis:leftx+", "axis:rightx+", "button:dpright", "button:b"},
 				gameBack = {"key:escape", "button:start"},
+
+				shoulderGameLeft = {"axis:triggerleft+", "axis:leftx-", "axis:rightx-", "key:d", "key:left"},
+				shoulderGameDown = {"axis:lefty+", "axis:righty+", "button:leftshoulder", "key:f", "key:down"},
+				shoulderGameUp = {"axis:lefty-", "axis:righty-", "button:rightshoulder", "key:j", "key:up"},
+				shoulderGameRight = {"axis:triggerright+", "axis:leftx+", "axis:rightx+", "key:k", "key:right"},
+				shoulderGameBack = {"button:start", "key:escape"},
+
+				faceGameLeft = {"axis:leftx-", "axis:rightx-", "button:dpleft", "button:x", "key:d", "key:left"},
+				faceGameDown = {"axis:lefty+", "axis:righty+", "button:dpdown", "button:a", "key:f", "key:down"},
+				faceGameUp = {"axis:lefty-", "axis:righty-", "button:dpup", "button:y", "key:j", "key:up"},
+				faceGameRight = {"axis:leftx+", "axis:rightx+", "button:dpright", "button:b", "key:k", "key:right"},
+				faceGameBack = {"button:start", "key:escape"},
 			},
 			joystick = love.joystick.getJoysticks()[1]
 		}
@@ -74,12 +102,26 @@ else
 				simoc = {"key:s"},
 				mechanicsInput = {"key:m"},
 				dodge = {"key:space", "button:leftstick"},
+				faceButtonDodge = {"key:space", "button:a", "button:b", "button:x", "button:y", "button:dpup", "button:dpdown", "button:dpleft", "button:dpright"},
+				shoulderButtonDodge = {"key:space", "axis:triggerleft+", "button:leftshoulder", "axis:triggerright+", "button:rightshoulder"},
 	
 				gameLeft = {"axis:triggerleft+", "axis:leftx-", "axis:rightx-", "button:dpleft", "button:x", "key:a", "key:left"},
 				gameDown = {"axis:lefty+", "axis:righty+", "button:leftshoulder", "button:dpdown", "button:a", "key:s", "key:down"},
 				gameUp = {"axis:lefty-", "axis:righty-", "button:rightshoulder", "button:dpup", "button:y", "key:w", "key:up"},
 				gameRight = {"axis:triggerright+", "axis:leftx+", "axis:rightx+", "button:dpright", "button:b", "key:d", "key:right"},
 				gameBack = {"button:start", "key:escape"},
+
+				shoulderGameLeft = {"axis:triggerleft+", "axis:leftx-", "axis:rightx-", "key:d", "key:left"},
+				shoulderGameDown = {"axis:lefty+", "axis:righty+", "button:leftshoulder", "key:f", "key:down"},
+				shoulderGameUp = {"axis:lefty-", "axis:righty-", "button:rightshoulder", "key:j", "key:up"},
+				shoulderGameRight = {"axis:triggerright+", "axis:leftx+", "axis:rightx+", "key:k", "key:right"},
+				shoulderGameBack = {"button:start", "key:escape"},
+
+				faceGameLeft = {"axis:leftx-", "axis:rightx-", "button:dpleft", "button:x", "key:d", "key:left"},
+				faceGameDown = {"axis:lefty+", "axis:righty+", "button:dpdown", "button:a", "key:f", "key:down"},
+				faceGameUp = {"axis:lefty-", "axis:righty-", "button:dpup", "button:y", "key:j", "key:up"},
+				faceGameRight = {"axis:leftx+", "axis:rightx+", "button:dpright", "button:b", "key:k", "key:right"},
+				faceGameBack = {"button:start", "key:escape"},
 			},
 			joystick = love.joystick.getJoysticks()[1]
 		}
@@ -95,12 +137,26 @@ else
 				simoc = {"key:s"},
 				mechanicsInput = {"key:m"},
 				dodge = {"key:space", "button:leftstick"},
+				faceButtonDodge = {"key:space", "button:a", "button:b", "button:x", "button:y", "button:dpup", "button:dpdown", "button:dpleft", "button:dpright"},
+				shoulderButtonDodge = {"key:space", "axis:triggerleft+", "button:leftshoulder", "axis:triggerright+", "button:rightshoulder"},
 	
 				gameLeft = {"key:a", "key:left", "axis:triggerleft+", "axis:leftx-", "axis:rightx-", "button:dpleft", "button:x"},
 				gameDown = {"key:s", "key:down", "axis:lefty+", "axis:righty+", "button:leftshoulder", "button:dpdown", "button:a"},
 				gameUp = {"key:w", "key:up", "axis:lefty-", "axis:righty-", "button:rightshoulder", "button:dpup", "button:y"},
 				gameRight = {"key:d", "key:right", "axis:triggerright+", "axis:leftx+", "axis:rightx+", "button:dpright", "button:b"},
 				gameBack = {"key:escape", "button:start"},
+
+				shoulderGameLeft = {"axis:triggerleft+", "axis:leftx-", "axis:rightx-", "key:d", "key:left"},
+				shoulderGameDown = {"axis:lefty+", "axis:righty+", "button:leftshoulder", "key:f", "key:down"},
+				shoulderGameUp = {"axis:lefty-", "axis:righty-", "button:rightshoulder", "key:j", "key:up"},
+				shoulderGameRight = {"axis:triggerright+", "axis:leftx+", "axis:rightx+", "key:k", "key:right"},
+				shoulderGameBack = {"button:start", "key:escape"},
+
+				faceGameLeft = {"axis:leftx-", "axis:rightx-", "button:dpleft", "button:x", "key:d", "key:left"},
+				faceGameDown = {"axis:lefty+", "axis:righty+", "button:dpdown", "button:a", "key:f", "key:down"},
+				faceGameUp = {"axis:lefty-", "axis:righty-", "button:dpup", "button:y", "key:j", "key:up"},
+				faceGameRight = {"axis:leftx+", "axis:rightx+", "button:dpright", "button:b", "key:k", "key:right"},
+				faceGameBack = {"button:start", "key:escape"},
 			},
 			joystick = love.joystick.getJoysticks()[1]
 		}

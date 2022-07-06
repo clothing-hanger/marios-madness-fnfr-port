@@ -58,7 +58,7 @@ return {
 		enemy.x, enemy.y = -340, 20
 		boyfriend.x, boyfriend.y = 260, 210
 
-		enemyIcon:animate("daddy dearest", false)
+		enemyIcon:animate("its a me", false)
 
 		self:load()
 	end,
@@ -87,12 +87,12 @@ return {
 
 
 		if health >= 80 then
-			if enemyIcon:getAnimName() == "daddy dearest" then
-				enemyIcon:animate("daddy dearest losing", false)
+			if enemyIcon:getAnimName() == "its a me" then
+				enemyIcon:animate("its a me losing", false)
 			end
 		else
-			if enemyIcon:getAnimName() == "daddy dearest losing" then
-				enemyIcon:animate("daddy dearest", false)
+			if enemyIcon:getAnimName() == "its a me losing" then
+				enemyIcon:animate("its a me", false)
 			end
 		end
 
@@ -107,7 +107,7 @@ return {
 				graphics.fadeOut(
 					0.5,
 					function()
-						Gamestate.switch(menu)
+						Gamestate.switch(songsMenu)
 
 						status.setLoading(false)
 					end
@@ -152,9 +152,11 @@ return {
 	end,
 
 	leave = function(self)
-		stageBack = nil
-		stageFront = nil
-		curtains = nil
+		LayerZero = nil
+		LayerOne = nil
+		LayerTwo = nil
+		LayerThree = nil
+		Ground = nil
 
 		weeks:leave()
 	end

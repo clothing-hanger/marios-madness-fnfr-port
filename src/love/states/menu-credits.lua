@@ -1,7 +1,7 @@
 local backFunc
 
 --load font
-local font = love.graphics.newFont("fonts/fnfFont.ttf", 24) -- not used yet but probably will be
+local font = love.graphics.newFont("fonts/fnfFont.ttf", 24) -- not used yet but probably will be              this is CH Engine's last project and its still unused lmao
 
 local selectSound = love.audio.newSource("sounds/menu/select.ogg", "static")
 
@@ -23,7 +23,7 @@ return {
 			if input:pressed("back") then
 				audio.playSound(selectSound)
 
-				Gamestate.switch(menu)				
+				Gamestate.switch(songsMenu)				
 			end
 		end
 	end,

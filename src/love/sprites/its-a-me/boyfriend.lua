@@ -196,8 +196,8 @@ return graphics.newSprite(
 		{x = 800, y = 1302, width = 370, height = 430, offsetX = -13, offsetY = 0, offsetWidth = 384, offsetHeight = 432}, -- 173: BF NOTE LEFT MISS0031
 		{x = 800, y = 1302, width = 370, height = 430, offsetX = -13, offsetY = 0, offsetWidth = 384, offsetHeight = 432}, -- 174: BF NOTE LEFT MISS0032
 		{x = 800, y = 1302, width = 370, height = 430, offsetX = -13, offsetY = 0, offsetWidth = 384, offsetHeight = 432}, -- 175: BF NOTE LEFT MISS0033
-		{x = 1626, y = 1302, width = 408, height = 405, offsetX = -1, offsetY = -2, offsetWidth = 415, offsetHeight = 435}, -- 176: BF NOTE RIGHT0000
-		{x = 1626, y = 1302, width = 408, height = 405, offsetX = -1, offsetY = -2, offsetWidth = 415, offsetHeight = 435}, -- 177: BF NOTE RIGHT0001
+		{x = 1626, y = 1302, width = 408, height = 405, offsetX = -4, offsetY = -16, offsetWidth = 415, offsetHeight = 435}, -- 176: BF NOTE RIGHT0000
+		{x = 1626, y = 1302, width = 408, height = 405, offsetX = -4, offsetY = -16, offsetWidth = 415, offsetHeight = 435}, -- 177: BF NOTE RIGHT0001
 		{x = 1194, y = 1302, width = 408, height = 407, offsetX = 0, offsetY = 0, offsetWidth = 409, offsetHeight = 407}, -- 178: BF NOTE RIGHT0002
 		{x = 1194, y = 1302, width = 408, height = 407, offsetX = 0, offsetY = 0, offsetWidth = 409, offsetHeight = 407}, -- 179: BF NOTE RIGHT0003
 		{x = 1194, y = 1302, width = 408, height = 407, offsetX = 0, offsetY = 0, offsetWidth = 409, offsetHeight = 407}, -- 180: BF NOTE RIGHT0004

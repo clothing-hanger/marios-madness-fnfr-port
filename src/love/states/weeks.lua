@@ -40,6 +40,8 @@ local doAttack = false
 return {
 	enter = function(self)
 
+
+		love.graphics.setDefaultFilter("nearest")
 		sounds = {
 			countdown = {
 				three = love.audio.newSource("sounds/countdown-3.ogg", "static"),
@@ -58,12 +60,34 @@ return {
 			death = love.audio.newSource("sounds/death.ogg", "static")
 		}
 
+
+		--[[
+		if weekNumber == "golden-land" then
+			images = {
+				icons = love.graphics.newImage(graphics.imagePath("icons")),
+				notes = love.graphics.newImage(graphics.imagePath("pixel/notes")),
+				numbers = love.graphics.newImage(graphics.imagePath("numbers"))
+			}
+		else
+			images = {
+				icons = love.graphics.newImage(graphics.imagePath("icons")),
+				notes = love.graphics.newImage(graphics.imagePath("notes")),
+				numbers = love.graphics.newImage(graphics.imagePath("numbers"))
+			}
+		end
+
+		--]]
+
 		images = {
 			icons = love.graphics.newImage(graphics.imagePath("icons")),
 			notes = love.graphics.newImage(graphics.imagePath("notes")),
+			--love.graphics.setDefaultFilter("nearest")
+			notesp = love.graphics.newImage(graphics.imagePath("notesp")),
+			--love.graphics.setDefaultFilter("linear")
 			numbers = love.graphics.newImage(graphics.imagePath("numbers"))
 		}
 
+		
 		sprites = {
 			icons = love.filesystem.load("sprites/icons.lua"),
 			numbers = love.filesystem.load("sprites/numbers.lua")
@@ -74,6 +98,7 @@ return {
 		girlfriend = love.filesystem.load("sprites/girlfriend.lua")()
 		boyfriend = love.filesystem.load("sprites/boyfriend.lua")()
 		lava = love.filesystem.load("sprites/i-hate-you/lava.lua")()
+
 
 		lava.y = 700
 
@@ -120,6 +145,8 @@ return {
 		if weekNumber == "apparition" then
 			cam.x, cam.y = 100, -165
 			cam.sizeX, cam.sizeY = 1.05, 1.05
+		elseif weekNumber == "alone" then
+			cam.x, cam.y = -boyfriend.x + 100, -boyfriend.y + 100
 		else
 			cam.x, cam.y = -boyfriend.x + 100, -boyfriend.y + 75
 		end
@@ -133,6 +160,21 @@ return {
 		combo = 0
 
 		enemy:animate("idle")
+
+		--enemyTwo = enemy     guglio wtf was this supposed to do
+
+		--nevermind sorry guglio i see what you were doing
+
+		--you did it wrong though
+
+		if weekNumber == "golden-land" then
+			enemyTwo = love.filesystem.load("sprites/golden-land/marioMad.lua")()
+			enemyTwo.sizeX, enemyTwo.sizeY = 2.5, 2.5
+			enemyTwo.x, enemyTwo.y = -380, -110
+		else
+			enemyTwo = enemy
+		end
+
 		enemyTwo:animate("idle")
 		boyfriend:animate("idle")
 
@@ -154,11 +196,20 @@ return {
 		shits = 0
 		misses = 0
 		doAttack = false
-	
-		sprites.leftArrow = love.filesystem.load("sprites/left-arrow.lua")
-		sprites.downArrow = love.filesystem.load("sprites/down-arrow.lua")
-		sprites.upArrow = love.filesystem.load("sprites/up-arrow.lua")
-		sprites.rightArrow = love.filesystem.load("sprites/right-arrow.lua")
+
+		if weekNumber ~= "golden-land" then
+			sprites.leftArrow = love.filesystem.load("sprites/left-arrow.lua")
+			sprites.downArrow = love.filesystem.load("sprites/down-arrow.lua")
+			sprites.upArrow = love.filesystem.load("sprites/up-arrow.lua")
+			sprites.rightArrow = love.filesystem.load("sprites/right-arrow.lua")
+		else
+			love.graphics.setDefaultFilter("nearest")
+			sprites.leftArrow = love.filesystem.load("sprites/pixel/notes/left-arrow.lua")
+			sprites.downArrow = love.filesystem.load("sprites/pixel/notes/down-arrow.lua")
+			sprites.upArrow = love.filesystem.load("sprites/pixel/notes/up-arrow.lua")
+			sprites.rightArrow = love.filesystem.load("sprites/pixel/notes/right-arrow.lua")
+			love.graphics.setDefaultFilter("linear")
+		end
 
 		enemyArrows = {
 			sprites.leftArrow(),
@@ -173,6 +224,7 @@ return {
 			sprites.rightArrow()
 		}
 
+
 		for i = 1, 4 do
 			enemyArrows[i].x = -925 + 165 * i
 			boyfriendArrows[i].x = 100 + 165 * i
@@ -186,6 +238,11 @@ return {
 
 			enemyNotes[i] = {}
 			boyfriendNotes[i] = {}
+
+			if weekNumber == "golden-land" then
+				boyfriendArrows[i].sizeX, boyfriendArrows[i].sizeY = 7, 7
+				enemyArrows[i].sizeX, enemyArrows[i].sizeY = 7, 7
+			end
 		end
 	end,
 
@@ -243,6 +300,9 @@ return {
 							enemyNotes[id][c].y = 400 - noteTime * 0.6 * speed
 
 							enemyNotes[id][c]:animate("on", false)
+							if weekNumber == "golden-land" then
+								enemyNotes[id][c].sizeX, enemyNotes[id][c].sizeY = 7.5, 7.5
+							end
 
 							if chart[i].sectionNotes[j].noteLength > 0 then
 								local c
@@ -253,6 +313,12 @@ return {
 									table.insert(enemyNotes[id], sprite())
 									enemyNotes[id][c].x = x
 									enemyNotes[id][c].y = 400 - (noteTime + k) * 0.6 * speed
+									if weekNumber == "golden-land" then
+										enemyNotes[id][c].sizeX, enemyNotes[id][c].sizeY = 7.5, 7.5
+									end
+									if weekNumber == "golden-land" then
+										enemyNotes[id][c].sizeX, enemyNotes[id][c].sizeY = 7.5, 9.5
+									end
 
 									enemyNotes[id][c]:animate("hold", false)
 								end
@@ -261,6 +327,9 @@ return {
 
 								enemyNotes[id][c].offsetY = -10
 								enemyNotes[id][c].sizeY = -1
+								if weekNumber == "golden-land" then
+									enemyNotes[id][c].sizeX, enemyNotes[id][c].sizeY = 7.5, 7.5
+								end
 
 								enemyNotes[id][c]:animate("end", false)
 							end
@@ -274,6 +343,9 @@ return {
 							boyfriendNotes[id][c].y = 400 - noteTime * 0.6 * speed
 
 							boyfriendNotes[id][c]:animate("on", false)
+							if weekNumber == "golden-land" then
+								boyfriendNotes[id][c].sizeX, boyfriendNotes[id][c].sizeY = 7.5, 7.5
+							end
 
 							if chart[i].sectionNotes[j].noteLength > 0 then
 								local c
@@ -284,6 +356,12 @@ return {
 									table.insert(boyfriendNotes[id], sprite())
 									boyfriendNotes[id][c].x = x
 									boyfriendNotes[id][c].y = 400 - (noteTime + k) * 0.6 * speed
+									if weekNumber == "golden-land" then
+										boyfriendNotes[id][c].sizeX, boyfriendNotes[id][c].sizeY = 7.5, 7.5
+									end
+									if weekNumber == "golden-land" then
+										boyfriendNotes[id][c].sizeX, boyfriendNotes[id][c].sizeY = 7.5, 9.5
+									end
 
 									boyfriendNotes[id][c]:animate("hold", false)
 								end
@@ -292,6 +370,9 @@ return {
 
 								boyfriendNotes[id][c].offsetY = -10
 								boyfriendNotes[id][c].sizeY = -1
+								if weekNumber == "golden-land" then
+									boyfriendNotes[id][c].sizeX, boyfriendNotes[id][c].sizeY = 7.5, 7.5
+								end
 
 								boyfriendNotes[id][c]:animate("end", false)
 							end
@@ -307,6 +388,9 @@ return {
 							boyfriendNotes[id][c].y = 400 - noteTime * 0.6 * speed
 
 							boyfriendNotes[id][c]:animate("on", false)
+							if weekNumber == "golden-land" then
+								boyfriendNotes[id][c].sizeX, boyfriendNotes[id][c].sizeY = 7.5, 7.5
+							end
 
 							if chart[i].sectionNotes[j].noteLength > 0 then
 								local c
@@ -317,6 +401,12 @@ return {
 									table.insert(boyfriendNotes[id], sprite())
 									boyfriendNotes[id][c].x = x
 									boyfriendNotes[id][c].y = 400 - (noteTime + k) * 0.6 * speed
+									if weekNumber == "golden-land" then
+										boyfriendNotes[id][c].sizeX, boyfriendNotes[id][c].sizeY = 7.5, 7.5
+									end
+									if weekNumber == "golden-land" then
+										boyfriendNotes[id][c].sizeX, boyfriendNotes[id][c].sizeY = 7.5, 9.5
+									end
 
 									boyfriendNotes[id][c]:animate("hold", false)
 								end
@@ -325,6 +415,9 @@ return {
 
 								boyfriendNotes[id][c].offsetY = -10
 								boyfriendNotes[id][c].sizeY = -1
+								if weekNumber == "golden-land" then
+									boyfriendNotes[id][c].sizeX, boyfriendNotes[id][c].sizeY = 7.5, 7.5
+								end
 
 								boyfriendNotes[id][c]:animate("end", false)
 							end
@@ -338,6 +431,9 @@ return {
 							enemyNotes[id][c].y = 400 - noteTime * 0.6 * speed
 
 							enemyNotes[id][c]:animate("on", false)
+							if weekNumber == "golden-land" then
+								enemyNotes[id][c].sizeX, enemyNotes[id][c].sizeY = 7.5, 7.5
+							end
 
 							if chart[i].sectionNotes[j].noteLength > 0 then
 								local c
@@ -348,6 +444,10 @@ return {
 									table.insert(enemyNotes[id], sprite())
 									enemyNotes[id][c].x = x
 									enemyNotes[id][c].y = 400 - (noteTime + k) * 0.6 * speed
+									if weekNumber == "golden-land" then
+										enemyNotes[id][c].sizeX, enemyNotes[id][c].sizeY = 7.5, 9.5
+									end
+
 
 									enemyNotes[id][c]:animate("hold", false)
 								end
@@ -356,6 +456,9 @@ return {
 
 								enemyNotes[id][c].offsetY = -10
 								enemyNotes[id][c].sizeY = -1
+								if weekNumber == "golden-land" then
+									enemyNotes[id][c].sizeX, enemyNotes[id][c].sizeY = 7.5, 7.5
+								end
 
 								enemyNotes[id][c]:animate("end", false)
 							end
@@ -373,6 +476,9 @@ return {
 							enemyNotes[id][c].y = -400 + noteTime * 0.6 * speed
 
 							enemyNotes[id][c]:animate("on", false)
+							if weekNumber == "golden-land" then
+								enemyNotes[id][c].sizeX, enemyNotes[id][c].sizeY = 7.5, 7.5
+							end
 
 							if chart[i].sectionNotes[j].noteLength > 0 then
 								local c
@@ -383,6 +489,10 @@ return {
 									table.insert(enemyNotes[id], sprite())
 									enemyNotes[id][c].x = x
 									enemyNotes[id][c].y = -400 + (noteTime + k) * 0.6 * speed
+
+									if weekNumber == "golden-land" then
+										enemyNotes[id][c].sizeX, enemyNotes[id][c].sizeY = 7.5, 9.5
+									end
 
 									enemyNotes[id][c]:animate("hold", false)
 								end
@@ -403,6 +513,9 @@ return {
 							boyfriendNotes[id][c].y = -400 + noteTime * 0.6 * speed
 
 							boyfriendNotes[id][c]:animate("on", false)
+							if weekNumber == "golden-land" then
+								boyfriendNotes[id][c].sizeX, boyfriendNotes[id][c].sizeY = 7.5, 7.5
+							end
 
 							if chart[i].sectionNotes[j].noteLength > 0 then
 								local c
@@ -413,6 +526,10 @@ return {
 									table.insert(boyfriendNotes[id], sprite())
 									boyfriendNotes[id][c].x = x
 									boyfriendNotes[id][c].y = -400 + (noteTime + k) * 0.6 * speed
+									if weekNumber == "golden-land" then
+										boyfriendNotes[id][c].sizeX, boyfriendNotes[id][c].sizeY = 7.5, 9.5
+									end
+
 
 									boyfriendNotes[id][c]:animate("hold", false)
 								end
@@ -420,6 +537,9 @@ return {
 								c = #boyfriendNotes[id]
 
 								boyfriendNotes[id][c].offsetY = -10
+								if weekNumber == "golden-land" then
+									boyfriendNotes[id][c].sizeX, boyfriendNotes[id][c].sizeY = 7.5, 7.5
+								end
 
 								boyfriendNotes[id][c]:animate("end", false)
 							end
@@ -435,6 +555,9 @@ return {
 							boyfriendNotes[id][c].y = -400 + noteTime * 0.6 * speed
 
 							boyfriendNotes[id][c]:animate("on", false)
+							if weekNumber == "golden-land" then
+								boyfriendNotes[id][c].sizeX, boyfriendNotes[id][c].sizeY = 7.5, 7.5
+							end
 
 							if chart[i].sectionNotes[j].noteLength > 0 then
 								local c
@@ -445,6 +568,9 @@ return {
 									table.insert(boyfriendNotes[id], sprite())
 									boyfriendNotes[id][c].x = x
 									boyfriendNotes[id][c].y = -400 + (noteTime + k) * 0.6 * speed
+									if weekNumber == "golden-land" then
+										boyfriendNotes[id][c].sizeX, boyfriendNotes[id][c].sizeY = 7.5, 9.5
+									end
 
 									boyfriendNotes[id][c]:animate("hold", false)
 								end
@@ -452,6 +578,10 @@ return {
 								c = #boyfriendNotes[id]
 
 								boyfriendNotes[id][c].offsetY = -10
+
+								if weekNumber == "golden-land" then
+									boyfriendNotes[id][c].sizeX, boyfriendNotes[id][c].sizeY = 7.5, 7.5
+								end
 
 								boyfriendNotes[id][c]:animate("end", false)
 							end
@@ -465,6 +595,9 @@ return {
 							enemyNotes[id][c].y = -400 + noteTime * 0.6 * speed
 
 							enemyNotes[id][c]:animate("on", false)
+							if weekNumber == "golden-land" then
+								enemyNotes[id][c].sizeX, enemyNotes[id][c].sizeY = 7.5, 7.5
+							end
 
 							if chart[i].sectionNotes[j].noteLength > 0 then
 								local c
@@ -475,6 +608,9 @@ return {
 									table.insert(enemyNotes[id], sprite())
 									enemyNotes[id][c].x = x
 									enemyNotes[id][c].y = -400 + (noteTime + k) * 0.6 * speed
+									if weekNumber == "golden-land" then
+										enemyNotes[id][c].sizeX, enemyNotes[id][c].sizeY = 7.5, 9.5
+									end
 									if k > chart[i].sectionNotes[j].noteLength - 71 / speed then
 										enemyNotes[id][c].offsetY = -10
 
@@ -487,6 +623,9 @@ return {
 								c = #enemyNotes[id]
 
 								enemyNotes[id][c].offsetY = -10
+								if weekNumber == "golden-land" then
+									enemyNotes[id][c].sizeX, enemyNotes[id][c].sizeY = 7.5, 7.5
+								end
 
 								enemyNotes[id][c]:animate("end", false)
 							end
@@ -574,13 +713,17 @@ return {
 
 		countingDown = true
 		countdownFade[1] = 0
-		audio.playSound(sounds.countdown.three)
+		if weekNumber ~= "golden-land" then
+			audio.playSound(sounds.countdown.three)
+		end
 		Timer.after(
 			(60 / bpm),
 			function()
 				countdown:animate("ready")
 				countdownFade[1] = 1
-				audio.playSound(sounds.countdown.two)
+				if weekNumber ~= "golden-land" then
+					audio.playSound(sounds.countdown.two)
+				end
 				Timer.tween(
 					(60 / bpm),
 					countdownFade,
@@ -589,7 +732,9 @@ return {
 					function()
 						countdown:animate("set")
 						countdownFade[1] = 1
-						audio.playSound(sounds.countdown.one)
+						if weekNumber ~= "golden-land" then
+							audio.playSound(sounds.countdown.one)
+						end
 						Timer.tween(
 							(60 / bpm),
 							countdownFade,
@@ -598,7 +743,9 @@ return {
 							function()
 								countdown:animate("go")
 								countdownFade[1] = 1
-								audio.playSound(sounds.countdown.go)
+								if weekNumber ~= "golden-land" then
+									audio.playSound(sounds.countdown.go)
+								end
 								Timer.tween(
 									(60 / bpm),
 									countdownFade,
@@ -683,7 +830,11 @@ return {
 				if weekNumber ~= "apparition" then
 
 					if events[i].mustHitSection then
-						camTimer = Timer.tween(1.25, cam, {x = -boyfriend.x + 100, y = -boyfriend.y + 75}, "out-quad")
+						if weekNumber == "alone" then
+							camTimer = Timer.tween(1.25, cam, {x = -boyfriend.x + 100, y = -boyfriend.y + 100}, "out-quad")
+						else
+							camTimer = Timer.tween(1.25, cam, {x = -boyfriend.x + 100, y = -boyfriend.y + 75}, "out-quad")
+						end
 					else
 						camTimer = Timer.tween(1.25, cam, {x = -enemy.x - 100, y = -enemy.y + 75}, "out-quad")
 					end
@@ -727,7 +878,7 @@ return {
 			doAttack = false
 		end
 
-		if input:pressed("dodge") then if boyfriend:getAnimName() ~= "dodge" then boyfriend:animate("dodge", false) end end
+		--if input:pressed("dodge") then boyfriend:animate("dodge", false) end
 		
 
 		if musicThres ~= oldMusicThres and math.fmod(absMusicTime, 120000 / bpm) < 100 then
@@ -819,6 +970,7 @@ return {
 					if combo >= 5 then self:safeAnimate(girlfriend, "sad", true, 1) end
 
 					combo = 0
+					misses = misses + 1
 
 					if settings.suddenDeath then
 						health = health - 1000
@@ -966,13 +1118,31 @@ return {
 			health = 100
 		elseif health > 20 and boyfriendIcon:getAnimName() == "boyfriend losing" then
 			boyfriendIcon:animate("boyfriend", false)
+		elseif health > 20 and boyfriendIcon:getAnimName() == "golden land bf losing" then
+			boyfriendIcon:animate("golden land bf", false)
 		elseif health <= 0 then -- Game over
 			if settings.practiceMode then
 				hasHitZero = true
 				health = 0
 			else
+				if weekNumber == "golden-land" then
+					fakeGirlfriend.y = 500
+				end
 				if fixedLivesCount < 1 then
-					Gamestate.push(gameOver)
+					if weekNumber ~= "apparition" then
+						Gamestate.push(gameOver)
+					else
+						enemy.sizeX, enemy.sizeY = 0, 0
+						Gamestate.push(apparitionGameOver)
+					end
+					if weekNumber == "i-hate-you" then
+						for i = 1, 53 do
+							lavaHappened[i] = false
+							booFade = 0
+							IHYTextHasHappened = false
+						end
+						lava.y = 700
+					end
 					lightningOneHasHappened = false
 					lightningTwoHasHappened = false
 					lightningThreeHasHappened = false
@@ -987,6 +1157,7 @@ return {
 					fadingFour = 1
 					fadingFive = 1
 					fadingSix = 1
+					fadingApparition = 0
 				else
 					livesCount = livesCount - 1
 					health = 20
@@ -996,6 +1167,8 @@ return {
 			end
 		elseif health <= 20 and boyfriendIcon:getAnimName() == "boyfriend" then
 			boyfriendIcon:animate("boyfriend losing", false)
+		elseif health <= 20 and boyfriendIcon:getAnimName() == "golden land bf" then
+			boyfriendIcon:animate("golden land bf losing", false)
 		end
 
 		enemyIcon.x = 425 - health * 10
@@ -1080,36 +1253,43 @@ return {
 			end
 
 			if mechanics then
+				if settings.downscroll then
+					love.graphics.scale(1, -1) -- now we flip the y-axis for downscroll users!
+				end
 				love.graphics.setColor(176 / 255, 0, 0)
 				lava:draw()
 				love.graphics.rectangle("fill", -1000, lavaFixed, 10000, 10000)
 				love.graphics.setColor(1, 1, 1)
 				lava:draw()
 				love.graphics.setColor(1, 1, 1)
+				if settings.downscroll then
+					love.graphics.scale(1, -1) -- now we put it back to normal to not fuck up the rest of the UI
+				end
 			end
 
 
 			if not settings.suddenDeath then
 				if settings.downscroll then
-					if weekNumber == "tutorial" then  -- opponent health bar color
-						graphics.setColor(165 / 255, 0, 77 / 255)
-					elseif weekNumber == "one" then
-						graphics.setColor(175 / 255, 103 / 255, 206 / 255)
-					elseif weekNumber == "two" then
-						if monster then
-							graphics.setColor(243 / 255, 1, 110 / 255)
-						else
-							graphics.setColor(213 / 255, 126 / 255, 0)
-						end
-
-					elseif weekNumber == "three" then
-						graphics.setColor(183 / 255, 216 / 255, 85 / 255)
+					if weekNumber == "its-a-me" then
+						graphics.setColor(111 / 255, 0, 0)  -- opponent health bar color
+					elseif weekNumber == "golden-land" then
+						graphics.setColor(70 / 255, 70 / 255, 70 / 255)
+					elseif weekNumber == "i-hate-you" then
+						graphics.setColor(20 / 255, 180 / 255, 0)
+					elseif weekNumber == "alone" then
+						graphics.setColor(4 / 255, 70 / 255, 4 / 255)
+					elseif weekNumber == "apparition" then
+						graphics.setColor(163 / 255, 124 / 255, 60 / 255)
 					else
-						graphics.setColor(216 / 255, 85 / 255, 142 / 255)
+						graphics.setColor(57 / 255, 0, 0)
 					end
 
 					love.graphics.rectangle("fill", -500, -400, 1000, 25)
-					graphics.setColor(49 / 255, 176 / 255, 209 / 255)  -- player health bar color
+					if weekNumber ~= "golden-land" then
+						graphics.setColor(49 / 255, 176 / 255, 209 / 255)  -- player health bar color
+					else
+						graphics.setColor(189 / 255, 189 / 255, 189 / 255)
+					end
 					love.graphics.rectangle("fill", 500, -400, -health * 10, 25)
 					graphics.setColor(0, 0, 0)
 					love.graphics.setLineWidth(10)
@@ -1117,25 +1297,27 @@ return {
 					love.graphics.setLineWidth(1)
 					graphics.setColor(1, 1, 1)
 				else
-					if weekNumber == "tutorial" then
-						graphics.setColor(165 / 255, 0, 77 / 255)  -- opponent health bar color
-					elseif weekNumber == "one" then
-						graphics.setColor(175 / 255, 103 / 255, 206 / 255)
-					elseif weekNumber == "two" then
-						if monster then
-							graphics.setColor(243 / 255, 1, 110 / 255)
-						else
-							graphics.setColor(213 / 255, 126 / 255, 0)
-						end
-
-					elseif weekNumber == "three" then
-						graphics.setColor(183 / 255, 216 / 255, 85 / 255)
+					if weekNumber == "its-a-me" then
+						graphics.setColor(111 / 255, 0, 0)  -- opponent health bar color
+					elseif weekNumber == "golden-land" then
+						graphics.setColor(70 / 255, 70 / 255, 70 / 255)
+					elseif weekNumber == "i-hate-you" then
+						graphics.setColor(20 / 255, 180 / 255, 0)
+					elseif weekNumber == "alone" then
+						graphics.setColor(4 / 255, 70 / 255, 4 / 255)
+					elseif weekNumber == "apparition" then
+						graphics.setColor(163 / 255, 124 / 255, 60 / 255)
 					else
-						graphics.setColor(216 / 255, 85 / 255, 142 / 255)
+						graphics.setColor(57 / 255, 0, 0)
 					end
 
 					love.graphics.rectangle("fill", -500, 350, 1000, 25)
-					graphics.setColor(49 / 255, 176 / 255, 209 / 255) -- player health bar color
+					--love.graphics.rectangle("fill", -500, -400, 1000, 25)
+					if weekNumber ~= "golden-land" then
+						graphics.setColor(49 / 255, 176 / 255, 209 / 255)  -- player health bar color
+					else
+						graphics.setColor(189 / 255, 189 / 255, 189 / 255)
+					end
 					love.graphics.rectangle("fill", 500, 350, -health * 10, 25)
 					graphics.setColor(0, 0, 0)
 					love.graphics.setLineWidth(10)
@@ -1227,8 +1409,15 @@ return {
 			--end
 			graphics.setColor(1, 1, 1)
 			pow:draw()
-			graphics.setColor(1, 1, 1, countdownFade[1])
-			countdown:draw()
+
+			if weekNumber ~= "i-hate-you" then
+				if weekNumber ~= "golden-land" then
+					if weekNumber ~= "powerdown" then
+						graphics.setColor(1, 1, 1, countdownFade[1])
+						countdown:draw()
+					end
+				end
+			end
 			graphics.setColor(1, 1, 1)
 		love.graphics.pop()
 

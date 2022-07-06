@@ -81,7 +81,7 @@ return {
 					function()
 						Gamestate.pop()
 
-						Gamestate.switch(menu)
+						Gamestate.switch(songsMenu)
 
 						status.setLoading(false)
 					end
