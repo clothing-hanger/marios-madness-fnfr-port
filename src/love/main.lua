@@ -51,16 +51,23 @@ function love.load()
 	-- Load states
 	clickStart = require "states.click-start"
 	debugMenu = require "states.debug-menu"
+<<<<<<< HEAD
 	--menu = require "states.menu"  -- old menu  not needed anymore      the shitty placeholder one
+=======
+	menu = require "states.menu"  -- old menu  not needed anymore      the shitty placeholder one
+>>>>>>> aeff10032501fe984ec143bda2be07624361476f
 	weeks = require "states.weeks"
 	weeksPixel = require "states.weeks-pixel"
 	menuCredits = require "states.menu-credits"
 	titleScreen = require "states.menu.menu"
 	weeksMenu = require "states.menu.menuWeek"
 	songsMenu = require "states.menu.songsMenu"
+<<<<<<< HEAD
 	powerdownControls = require "states.menu.controls"
 	shoulderWeeks = require "states.shoulderWeeks"
 	faceWeeks = require "states.faceWeeks"
+=======
+>>>>>>> aeff10032501fe984ec143bda2be07624361476f
 
 
 
@@ -78,6 +85,16 @@ function love.load()
 	songPowerdown = require "weeks.powerdown"  -- do not use
 	songPowerdownShoulderDodge = require "weeks.powerdownShoulder"
 	songPowerdownFaceDodge = require "weeks.powerdownFace"
+	--songRacetraitors = require "weeks.racetraitors"
+
+
+	-- load songs as states
+	songItsAMe = require "weeks.its-a-me"
+	songGoldenLand = require "weeks.golden-land"
+	songIHateYou = require "weeks.i-hate-you"
+	songAlone =  require "weeks.alone"
+	songApparition = require "weeks.apparition"
+	songPowerdown = require "weeks.powerdown"
 	--songRacetraitors = require "weeks.racetraitors"
 
 

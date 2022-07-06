@@ -114,8 +114,13 @@ return graphics.newSprite(
 		{x = 0, y = 1302, width = 437, height = 403, offsetX = 0, offsetY = -7, offsetWidth = 487, offsetHeight = 410}, -- 91: Boyfriend Dodge0022
 		{x = 461, y = 1302, width = 437, height = 403, offsetX = 0, offsetY = -7, offsetWidth = 487, offsetHeight = 410}, -- 92: Boyfriend Dodge0023
 		{x = 3250, y = 660, width = 437, height = 403, offsetX = 0, offsetY = -7, offsetWidth = 487, offsetHeight = 410}, -- 93: Boyfriend Dodge0024
+<<<<<<< HEAD
 		{x = 1319, y = 1302, width = 374, height = 357, offsetX = -1, offsetY = -20, offsetWidth = 378, offsetHeight = 392}, -- 94: Boyfriend NOTE DOWN0000
 		{x = 1319, y = 1302, width = 374, height = 357, offsetX = -1, offsetY = -20, offsetWidth = 378, offsetHeight = 392}, -- 95: Boyfriend NOTE DOWN0001
+=======
+		{x = 1319, y = 1302, width = 374, height = 357, offsetX = -1, offsetY = -5, offsetWidth = 378, offsetHeight = 392}, -- 94: Boyfriend NOTE DOWN0000
+		{x = 1319, y = 1302, width = 374, height = 357, offsetX = -1, offsetY = -5, offsetWidth = 378, offsetHeight = 392}, -- 95: Boyfriend NOTE DOWN0001
+>>>>>>> aeff10032501fe984ec143bda2be07624361476f
 		{x = 922, y = 1302, width = 373, height = 362, offsetX = 0, offsetY = 0, offsetWidth = 375, offsetHeight = 362}, -- 96: Boyfriend NOTE DOWN0002
 		{x = 922, y = 1302, width = 373, height = 362, offsetX = 0, offsetY = 0, offsetWidth = 375, offsetHeight = 362}, -- 97: Boyfriend NOTE DOWN0003
 		{x = 922, y = 1302, width = 373, height = 362, offsetX = 0, offsetY = 0, offsetWidth = 375, offsetHeight = 362}, -- 98: Boyfriend NOTE DOWN0004

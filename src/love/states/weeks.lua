@@ -878,7 +878,11 @@ return {
 			doAttack = false
 		end
 
+<<<<<<< HEAD
 		--if input:pressed("dodge") then boyfriend:animate("dodge", false) end
+=======
+		if input:pressed("dodge") then boyfriend:animate("dodge", false) end
+>>>>>>> aeff10032501fe984ec143bda2be07624361476f
 		
 
 		if musicThres ~= oldMusicThres and math.fmod(absMusicTime, 120000 / bpm) < 100 then

@@ -25,10 +25,6 @@ return {
 	enter = function(self, from, songNum, songAppend)
 		weeks:enter()
 
-<<<<<<< HEAD
-		weekNumber = "i-hate-you" 
-
-=======
 		weekNumber = "i-hate-you"  -- haha just like how the marios madness devs hate me    why do they keep ignoring me 
 
 		--none of this works and it was a huge waste of time
@@ -36,7 +32,6 @@ return {
 		--i want to delete this port but i have spent too much time on it 
 
 
->>>>>>> aeff10032501fe984ec143bda2be07624361476f
 		lavaHappened = {}
 
 		for i = 1, 53 do
@@ -53,10 +48,6 @@ return {
 		LayerZero = graphics.newImage(love.graphics.newImage(graphics.imagePath("i-hate-you/bg")))
 		LayerOne = graphics.newImage(love.graphics.newImage(graphics.imagePath("i-hate-you/floor"))) -- I HATE THE FLOOR
 		text = graphics.newImage(love.graphics.newImage(graphics.imagePath("i-hate-you/text")))
-		light = graphics.newImage(love.graphics.newImage(graphics.imagePath("i-hate-you/light")))
-		love.graphics.setDefaultFilter("nearest")
-		start = graphics.newImage(love.graphics.newImage(graphics.imagePath("i-hate-you/hatestart")))
-		love.graphics.setDefaultFilter("linear")
 
 		boo = love.filesystem.load("sprites/i-hate-you/boo.lua")()
 		booOne = love.filesystem.load("sprites/i-hate-you/boo.lua")()
@@ -77,18 +68,9 @@ return {
 		girlfriend.x, girlfriend.y = 30, -50
 		enemy.x, enemy.y = -380, -20
 		boyfriend.x, boyfriend.y = 360, 100
-<<<<<<< HEAD
-		mario.x, mario.y = -600, 60
-		marioTwo.x, marioTwo.y = 600, 60
-		text.x, text.y = 655, 50
-		text.sizeX, text.sizeY = 0.9, 0.9
-		LayerZero.y = -200
-		light.y = -70
-=======
 		mario.x, mario.y = -500, 50
 		marioTwo.x, marioTwo.y = 500, 50
 		text.x, text.y = 525, -125
-		LayerZero.y = -200
 
 		boyfriend.sizeX, boyfriend.sizeY = 0.8, 0.8
 		enemy.sizeX, enemy.sizeY = 0.8, 0.8
@@ -100,29 +82,8 @@ return {
 
 		boo.sizeX = -1
 
->>>>>>> aeff10032501fe984ec143bda2be07624361476f
 
-		light.sizeX = 5
-		light.sizeY = 5
-
-		boyfriend.sizeX, boyfriend.sizeY = 0.8, 0.8
-		enemy.sizeX, enemy.sizeY = 0.8, 0.8
-		girlfriend.sizeX, girlfriend.sizeY = 0.8, 0.8
-
-		boo.x, boo.y = -600, -175  -- left one
-		booOne.x, booOne.y = 300, -300  -- higher one
-		booTwo.x, booTwo.y = 340, -120  -- lower one
-
-		candle.x, candle.y = -550, -280 --left
-		candleOne.x, candleOne.y = 580, -280 --right
-
-		start.x = 270
-		start.sizeX, start.sizeY = 4, 4
-
-		boo.sizeX = -1
-
-
-		enemyIcon:animate("i hate you", false)
+		enemyIcon:animate("daddy dearest", false)
 		boo:animate("anim", true)
 		booOne:animate("anim", true)
 		booTwo:animate("anim", true)
@@ -130,51 +91,6 @@ return {
 		candleOne:animate("anim", true)
 		mario:animate("empty", true)
 		marioTwo:animate("empty", true)
-
-
-		startSound = love.audio.newSource("sounds/i-hate-you/intro.ogg", "static")
-
-
-		booFade = 0
-
-
-		function IHYintro()
-			Timer.script(function(wait)
-				IHYIntroFade = 1
-				IHYFadeIntro = false
-				countingDown = true
-				lastReportedPlaytime = 0
-				musicTime = (240 / bpm) * -1000
-		
-				musicThres = 0
-				musicPos = 0
-				wait(0.2)
-				displayStart = true
-				startSound:play()
-
-
-				wait(1.3)
-				displayStart = false
-				wait(0.2)
-
-				countingDown = false
-				IHYFadeIntro = true
-
-				previousFrameTime = love.timer.getTime() * 1000
-				musicTime = 0
-
-				if inst then inst:play() end
-				voices:play()
-			end)
-		end
-
-		function tweenLight()
-			Timer.tween(1, light, {y = light.y - 70}, "in-out-quad", function()
-				Timer.tween(1, light, {y = light.y + 70}, "in-out-quad", function()
-					tweenLight()
-				end)
-			end)
-		end
 
 		self:load()
 	end,
@@ -189,9 +105,7 @@ return {
 
 		self:initUI()
 
-		--weeks:setupCountdown()
-		IHYintro()
-		tweenLight()
+		weeks:setupCountdown()
 	end,
 
 	initUI = function(self)
@@ -211,20 +125,6 @@ return {
 		mario:update(dt)
 		marioTwo:update(dt)
 
-<<<<<<< HEAD
-		if musicTime < 10000  then
-			mario:animate("empty", true)
-			marioTwo:animate("empty", true)
-		end
-
-		delta = love.timer.getDelta()
-
-		if IHYFadeIntro then
-			IHYIntroFade = IHYIntroFade - 0.9999 * delta
-		end
-
-=======
->>>>>>> aeff10032501fe984ec143bda2be07624361476f
 		if musicTime >= 112857 then
 			if mario:getAnimName() == "empty" then
 				mario:animate("grab", false)
@@ -234,27 +134,6 @@ return {
 				if not mario:isAnimated() then
 					mario:animate("idle", true)
 				end
-<<<<<<< HEAD
-			end
-		end
-
-		if musicTime >= 115714 then
-			if marioTwo:getAnimName() == "empty" then
-				marioTwo:animate("grab", false)
-			end
-			if marioTwo:getAnimName() == "grab" then
-				if not marioTwo:isAnimated() then
-					marioTwo:animate("idle", true)
-				end
-			end
-		end
-
-		if musicTime > 98035 then
-			if not IHYTextHasHappened then
-				Timer.tween(0.1, text, {sizeX = 0.8, sizeY = 0.8}, "out-expo")
-				IHYTextHasHappened = true
-=======
->>>>>>> aeff10032501fe984ec143bda2be07624361476f
 			end
 		end
 
@@ -278,15 +157,14 @@ return {
 
 
 
-
 	
 		if health >= 80 then
-			if enemyIcon:getAnimName() == "i hate you" then
-				enemyIcon:animate("i hate you losing", false)
+			if enemyIcon:getAnimName() == "daddy dearest" then
+				enemyIcon:animate("daddy dearest losing", false)
 			end
 		else
-			if enemyIcon:getAnimName() == "i hate you losing" then
-				enemyIcon:animate("i hate you", false)
+			if enemyIcon:getAnimName() == "daddy dearest losing" then
+				enemyIcon:animate("daddy dearest", false)
 			end
 		end  
 
@@ -301,17 +179,11 @@ return {
 				graphics.fadeOut(
 					0.5,
 					function()
-						Gamestate.switch(songsMenu)
+						Gamestate.switch(menu)
 
 						status.setLoading(false)
 					end
 				)
-			end
-		end
-
-		if musicTime > 81428.571 then
-			if booFade < 1 then
-				booFade = booFade + 0.95 * delta
 			end
 		end
 
@@ -779,9 +651,6 @@ return {
 				
 
 				LayerZero:draw()
-<<<<<<< HEAD
-				
-=======
 				boo:draw()
 				booOne:draw()
 				booTwo:draw()
@@ -789,22 +658,9 @@ return {
 				if IHYTextHasHappened then
 					text:draw()
 				end
->>>>>>> aeff10032501fe984ec143bda2be07624361476f
 
 				candle:draw()
 				candleOne:draw()
-
-				love.graphics.setColor(1, 1, 1, booFade)
-				boo:draw()
-				booOne:draw()
-				booTwo:draw()
-				love.graphics.setColor(1, 1, 1)
-
-				if IHYTextHasHappened then
-					text:draw()
-				end
-				light:draw()
-
 			--	love.graphics.setColor(0, 0, 0, 0)
 
 			love.graphics.pop()
@@ -826,19 +682,6 @@ return {
 
 				enemy:draw()
 				boyfriend:draw()
-
-
-				love.graphics.setColor(0, 0, 0, IHYIntroFade)
-				love.graphics.rectangle("fill", -2000, -2000, 10000, 100000)
-				
-				love.graphics.setColor(1, 1, 1, IHYIntroFade)
-				if displayStart then
-					start:draw()
-				end
-
-				
-				love.graphics.setColor(1, 1, 1, 1)
-
 			love.graphics.pop()
 			love.graphics.push()
 				love.graphics.translate(cam.x * 1.1, cam.y * 1.1)
@@ -848,11 +691,7 @@ return {
 			weeks:drawRating(0.9)
 		love.graphics.pop()
 
-		if not countingDown then
-			weeks:drawUI()
-		end
-
-		--weeks:drawUI()
+		weeks:drawUI()
 	end,
 
 	leave = function(self)

@@ -44,18 +44,22 @@ end
 return {
 	enter = function(self, previous)
 
+<<<<<<< HEAD
 		music:play()
 
 		fading = 1
 
 
 
+=======
+>>>>>>> aeff10032501fe984ec143bda2be07624361476f
 		weekOneImage = graphics.newImage(love.graphics.newImage(graphics.imagePath("menu/week0")))
 		weekTwoImage = graphics.newImage(love.graphics.newImage(graphics.imagePath("menu/week1")))
 		weekThreeImage = graphics.newImage(love.graphics.newImage(graphics.imagePath("menu/week2")))
 		weekFourImage = graphics.newImage(love.graphics.newImage(graphics.imagePath("menu/week3")))
 		weekFiveImage = graphics.newImage(love.graphics.newImage(graphics.imagePath("menu/week4")))
 		weekSixImage = graphics.newImage(love.graphics.newImage(graphics.imagePath("menu/week5")))
+<<<<<<< HEAD
 		creditsImage = graphics.newImage(love.graphics.newImage(graphics.imagePath("menu/creditsTile")))
 
 		circleThing = graphics.newImage(love.graphics.newImage(graphics.imagePath("menu/circleThingIdfk")))
@@ -69,6 +73,8 @@ return {
 		selectSong.y = -300
 
 		static:animate("anim", true)
+=======
+>>>>>>> aeff10032501fe984ec143bda2be07624361476f
 
 		weekOneImage.x = 0
 		weekTwoImage.x = 420
@@ -76,9 +82,12 @@ return {
 		weekFourImage.x = 1260
 		weekFiveImage.x = 1680
 		weekSixImage.x = 2100
+<<<<<<< HEAD
 		creditsImage.x = 2520
 
 		songName = "It's a Me"
+=======
+>>>>>>> aeff10032501fe984ec143bda2be07624361476f
 
 
 
@@ -93,6 +102,7 @@ return {
 		graphics.setFade(0)
 		graphics.fadeIn(0.5)
 
+<<<<<<< HEAD
 		function tweenSelectSong()
 			Timer.tween(2.5, selectSong, {y = selectSong.y + 25}, "in-out-quad", function()
 				Timer.tween(2.5, selectSong, {y = selectSong.y - 25}, "in-out-quad", function()
@@ -103,6 +113,8 @@ return {
 
 		tweenSelectSong()
 
+=======
+>>>>>>> aeff10032501fe984ec143bda2be07624361476f
 
 	end,
 
@@ -110,6 +122,7 @@ return {
 
 
 	update = function(self, dt)
+<<<<<<< HEAD
 		delta = love.timer.getDelta()
 
 
@@ -130,6 +143,8 @@ return {
 		end
 
 		static:update(dt)
+=======
+>>>>>>> aeff10032501fe984ec143bda2be07624361476f
 
 		if not graphics.isFading() then
 			if input:pressed("confirm") then
@@ -194,13 +209,18 @@ return {
 							status.setLoading(false)
 						end
 					)
+<<<<<<< HEAD
 				elseif menuSongNum == 6 then
+=======
+				else --menuSongNum == 6 then
+>>>>>>> aeff10032501fe984ec143bda2be07624361476f
 					titleScreen:musicStop()
 					songNum = 1
 					status.setLoading(true)
 					graphics.fadeOut(
 						0.5,
 						function()
+<<<<<<< HEAD
 							if love.system.getOS() == "NX" then
 								Gamestate.switch(powerdownControls)
 							else
@@ -218,12 +238,16 @@ return {
 						0.5,
 						function()
 							Gamestate.switch(menuCredits)
+=======
+							Gamestate.switch(songPowerdown)
+>>>>>>> aeff10032501fe984ec143bda2be07624361476f
 		
 							status.setLoading(false)
 						end
 					)
 				end
 
+<<<<<<< HEAD
 			
 			elseif input:pressed("left") then
 				if menuSongNum ~= 1 then
@@ -249,6 +273,38 @@ return {
 					Timer.tween(0.2, weekSixImage, {x = weekSixImage.x - 420}, "out-quad")
 					Timer.tween(0.2, creditsImage, {x = creditsImage.x - 420}, "out-quad")
 				end
+=======
+
+			
+			elseif input:pressed("left") then
+				if menuSongNum ~= 1 then
+					menuSongNum = menuSongNum - 1
+
+
+					Timer.tween(0.2, weekOneImage, {x = weekOneImage.x + 420}, "out-expo")
+					Timer.tween(0.2, weekTwoImage, {x = weekTwoImage.x + 420}, "out-expo")
+					Timer.tween(0.2, weekThreeImage, {x = weekThreeImage.x + 420}, "out-expo")
+					Timer.tween(0.2, weekFourImage, {x = weekFourImage.x + 420}, "out-expo")
+					Timer.tween(0.2, weekFiveImage, {x = weekFiveImage.x + 420}, "out-expo")
+					Timer.tween(0.2, weekSixImage, {x = weekSixImage.x + 420}, "out-expo")
+
+
+				end
+
+			elseif input:pressed("right") then
+				if menuSongNum ~= 6 then
+					menuSongNum = menuSongNum + 1
+
+					
+					Timer.tween(0.2, weekOneImage, {x = weekOneImage.x - 420}, "out-expo")
+					Timer.tween(0.2, weekTwoImage, {x = weekTwoImage.x - 420}, "out-expo")
+					Timer.tween(0.2, weekThreeImage, {x = weekThreeImage.x - 420}, "out-expo")
+					Timer.tween(0.2, weekFourImage, {x = weekFourImage.x - 420}, "out-expo")
+					Timer.tween(0.2, weekFiveImage, {x = weekFiveImage.x - 420}, "out-expo")
+					Timer.tween(0.2, weekSixImage, {x = weekSixImage.x - 420}, "out-expo")
+				end
+
+>>>>>>> aeff10032501fe984ec143bda2be07624361476f
 			elseif input:pressed("back") then
 				audio.playSound(selectSound)
 
@@ -269,6 +325,7 @@ return {
 
 				love.graphics.rectangle("fill", -2000, -2000, 10000, 10000)
 
+<<<<<<< HEAD
 				
 				circleThing:draw()
 
@@ -276,12 +333,16 @@ return {
 
 				static:draw()
 				love.graphics.setColor(1, 1, 1, 1)
+=======
+
+>>>>>>> aeff10032501fe984ec143bda2be07624361476f
 				weekOneImage:draw()
 				weekTwoImage:draw()
 				weekThreeImage:draw()
 				weekFourImage:draw()
 				weekFiveImage:draw()
 				weekSixImage:draw()
+<<<<<<< HEAD
 				creditsImage:draw()
 
 
@@ -307,6 +368,10 @@ return {
 
 
 				--[[
+=======
+
+				love.graphics.setColor(0, 0, 0)
+>>>>>>> aeff10032501fe984ec143bda2be07624361476f
 
 				love.graphics.printf(
 					menuSongNum,
@@ -319,8 +384,11 @@ return {
 					1.6
 				)
 
+<<<<<<< HEAD
 				--]]
 
+=======
+>>>>>>> aeff10032501fe984ec143bda2be07624361476f
 
 
 

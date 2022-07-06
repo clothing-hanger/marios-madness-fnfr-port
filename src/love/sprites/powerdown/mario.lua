@@ -149,7 +149,10 @@ return graphics.newSprite(
 		["up"] = {start = 57, stop = 70, speed = 24, offsetX = -59, offsetY = 59},
 		["idle"] = {start = 15, stop = 30, speed = 30, offsetX = 0, offsetY = 0},
 		["wahoo"] = {start = 77, stop = 120, speed = 30, offsetX = -212, offsetY = 12}
+<<<<<<< HEAD
 	  --["jump"] = {start = 77, stop = 120, speed = 30, offsetX = -212, offsetY = 12} 
+=======
+>>>>>>> aeff10032501fe984ec143bda2be07624361476f
 	},
 	"idle",
 	false
