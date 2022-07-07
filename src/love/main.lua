@@ -78,7 +78,7 @@ function love.load()
 	songPowerdown = require "weeks.powerdown"  -- do not use
 	songPowerdownShoulderDodge = require "weeks.powerdownShoulder"
 	songPowerdownFaceDodge = require "weeks.powerdownFace"
-	--songRacetraitors = require "weeks.racetraitors"
+	songRacetraitors = require "weeks.racetraitors"
 
 
 	--load images

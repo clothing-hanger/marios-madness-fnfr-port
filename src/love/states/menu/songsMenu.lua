@@ -205,7 +205,7 @@ return {
 								Gamestate.switch(powerdownControls)
 							else
 								--Gamestate.switch(songPowerdownFaceDodge)
-								Gamestate.switch(powerdownControls)
+								Gamestate.switch(songRacetraitors)
 							end
 							status.setLoading(false)
 						end

@@ -3,98 +3,23 @@ return {
 	speed = 2.7,
 	{
 		mustHitSection = true,
-		sectionNotes = {
-			{
-				noteTime = 576.923076923077,
-				noteType = -1,
-				noteLength = Triggers Racing
-			},
-			{
-				noteTime = 1269.23076923077,
-				noteType = -1,
-				noteLength = Play Animation
-			},
-			{
-				noteTime = 0,
-				noteType = 5,
-				noteLength = Set Cam Zoom
-			}
-		}
+		sectionNotes = {}
 	},
 	{
 		mustHitSection = false,
-		sectionNotes = {
-			{
-				noteTime = 1846.875,
-				noteType = -1,
-				noteLength = Play Animation
-			},
-			{
-				noteTime = 1846.15384615385,
-				noteType = -1,
-				noteLength = Triggers Racing
-			},
-			{
-				noteTime = 1850.96153846154,
-				noteType = -1,
-				noteLength = Set Cam Zoom
-			}
-		}
+		sectionNotes = {}
 	},
 	{
 		mustHitSection = false,
-		sectionNotes = {
-			{
-				noteTime = 4658.65384615385,
-				noteType = -1,
-				noteLength = Triggers Racing
-			},
-			{
-				noteTime = 4663.46153846154,
-				noteType = -1,
-				noteLength = Play Animation
-			},
-			{
-				noteTime = 4903.84615384615,
-				noteType = -1,
-				noteLength = Set Cam Zoom
-			}
-		}
+		sectionNotes = {}
 	},
 	{
 		mustHitSection = false,
-		sectionNotes = {
-			{
-				noteTime = 7315.38461538462,
-				noteType = -1,
-				noteLength = Set Cam Zoom
-			}
-		}
+		sectionNotes = {}
 	},
 	{
 		mustHitSection = false,
-		sectionNotes = {
-			{
-				noteTime = 7389.42307692308,
-				noteType = -1,
-				noteLength = Play Animation
-			},
-			{
-				noteTime = 7384.61538461538,
-				noteType = -1,
-				noteLength = Triggers Racing
-			},
-			{
-				noteTime = 9225.96153846154,
-				noteType = -1,
-				noteLength = Ocultar HUD
-			},
-			{
-				noteTime = 7394.23076923077,
-				noteType = -1,
-				noteLength = Play Animation
-			}
-		}
+		sectionNotes = {}
 	},
 	{
 		mustHitSection = false,
@@ -143,11 +68,6 @@ return {
 				noteTime = 10846.1538461538,
 				noteType = 2,
 				noteLength = 0
-			},
-			{
-				noteTime = 9230.76923076923,
-				noteType = -1,
-				noteLength = Triggers Racing
 			}
 		}
 	},
@@ -193,11 +113,6 @@ return {
 				noteTime = 12692.3076923077,
 				noteType = 2,
 				noteLength = 0
-			},
-			{
-				noteTime = 11192.3076923077,
-				noteType = -1,
-				noteLength = Play Animation
 			}
 		}
 	},
@@ -1123,11 +1038,6 @@ return {
 				noteTime = 38769.2307692308,
 				noteType = 6,
 				noteLength = 346.153846153846
-			},
-			{
-				noteTime = 39346.1538461539,
-				noteType = -1,
-				noteLength = Triggers Racing
 			}
 		}
 	},
@@ -1208,21 +1118,6 @@ return {
 				noteTime = 42230.7692307692,
 				noteType = 1,
 				noteLength = 0
-			},
-			{
-				noteTime = 40615.3846153846,
-				noteType = -1,
-				noteLength = Add Camera Zoom
-			},
-			{
-				noteTime = 40620.1923076923,
-				noteType = -1,
-				noteLength = Triggers Racing
-			},
-			{
-				noteTime = 42000,
-				noteType = -1,
-				noteLength = Triggers Racing
 			}
 		}
 	},
@@ -1303,11 +1198,6 @@ return {
 				noteTime = 44076.9230769231,
 				noteType = 1,
 				noteLength = 0
-			},
-			{
-				noteTime = 43846.1538461538,
-				noteType = -1,
-				noteLength = Triggers Racing
 			}
 		}
 	},
@@ -1433,11 +1323,6 @@ return {
 				noteTime = 47769.2307692308,
 				noteType = 1,
 				noteLength = 0
-			},
-			{
-				noteTime = 47769.2307692308,
-				noteType = -1,
-				noteLength = Triggers Racing
 			}
 		}
 	},
@@ -1703,11 +1588,6 @@ return {
 				noteTime = 55153.8461538461,
 				noteType = 2,
 				noteLength = 0
-			},
-			{
-				noteTime = 55153.8461538461,
-				noteType = -1,
-				noteLength = Triggers Racing
 			}
 		}
 	},
@@ -1793,16 +1673,6 @@ return {
 				noteTime = 57000,
 				noteType = 3,
 				noteLength = 0
-			},
-			{
-				noteTime = 55389.4230769231,
-				noteType = -1,
-				noteLength = Triggers Racing
-			},
-			{
-				noteTime = 55384.6153846154,
-				noteType = -1,
-				noteLength = Add Camera Zoom
 			}
 		}
 	},
@@ -1880,18 +1750,23 @@ return {
 				noteLength = 0
 			},
 			{
+				noteTime = 60230.7692307692,
+				noteType = 0,
+				noteLength = 0
+			},
+			{
 				noteTime = 60115.3846153846,
 				noteType = 2,
 				noteLength = 0
 			},
 			{
-				noteTime = 60461.5384615384,
-				noteType = 2,
+				noteTime = 60000,
+				noteType = 3,
 				noteLength = 0
 			},
 			{
-				noteTime = 60230.7692307692,
-				noteType = 0,
+				noteTime = 60461.5384615384,
+				noteType = 2,
 				noteLength = 0
 			},
 			{
@@ -1903,17 +1778,17 @@ return {
 				noteTime = 60692.3076923077,
 				noteType = 0,
 				noteLength = 0
-			},
-			{
-				noteTime = 60000,
-				noteType = 3,
-				noteLength = 0
 			}
 		}
 	},
 	{
 		mustHitSection = true,
 		sectionNotes = {
+			{
+				noteTime = 61153.8461538461,
+				noteType = 1,
+				noteLength = 0
+			},
 			{
 				noteTime = 60923.0769230769,
 				noteType = 1,
@@ -1925,8 +1800,8 @@ return {
 				noteLength = 0
 			},
 			{
-				noteTime = 61153.8461538461,
-				noteType = 1,
+				noteTime = 61384.6153846154,
+				noteType = 2,
 				noteLength = 0
 			},
 			{
@@ -1935,18 +1810,13 @@ return {
 				noteLength = 0
 			},
 			{
-				noteTime = 61384.6153846154,
+				noteTime = 61615.3846153846,
 				noteType = 2,
 				noteLength = 0
 			},
 			{
 				noteTime = 61500,
 				noteType = 0,
-				noteLength = 0
-			},
-			{
-				noteTime = 61615.3846153846,
-				noteType = 2,
 				noteLength = 0
 			},
 			{
@@ -1960,13 +1830,13 @@ return {
 				noteLength = 0
 			},
 			{
-				noteTime = 61961.5384615384,
-				noteType = 3,
+				noteTime = 62076.9230769231,
+				noteType = 2,
 				noteLength = 0
 			},
 			{
-				noteTime = 62076.9230769231,
-				noteType = 2,
+				noteTime = 61961.5384615384,
+				noteType = 3,
 				noteLength = 0
 			},
 			{
@@ -2190,11 +2060,6 @@ return {
 				noteLength = 0
 			},
 			{
-				noteTime = 67384.6153846154,
-				noteType = 0,
-				noteLength = 0
-			},
-			{
 				noteTime = 67500,
 				noteType = 2,
 				noteLength = 0
@@ -2205,13 +2070,13 @@ return {
 				noteLength = 0
 			},
 			{
-				noteTime = 67730.7692307692,
-				noteType = 3,
+				noteTime = 67384.6153846154,
+				noteType = 0,
 				noteLength = 0
 			},
 			{
-				noteTime = 67846.1538461538,
-				noteType = 0,
+				noteTime = 67730.7692307692,
+				noteType = 3,
 				noteLength = 0
 			},
 			{
@@ -2222,6 +2087,11 @@ return {
 			{
 				noteTime = 68076.923076923,
 				noteType = 1,
+				noteLength = 0
+			},
+			{
+				noteTime = 67846.1538461538,
+				noteType = 0,
 				noteLength = 0
 			},
 			{
@@ -2302,7 +2172,7 @@ return {
 			{
 				noteTime = 69923.0769230769,
 				noteType = 2,
-				noteLength = Triggers Racing
+				noteLength = 0
 			}
 		}
 	},
@@ -2378,16 +2248,6 @@ return {
 				noteTime = 71769.2307692307,
 				noteType = 3,
 				noteLength = 0
-			},
-			{
-				noteTime = 70158.6538461538,
-				noteType = -1,
-				noteLength = Triggers Racing
-			},
-			{
-				noteTime = 70153.8461538461,
-				noteType = -1,
-				noteLength = Add Camera Zoom
 			}
 		}
 	},
@@ -2538,21 +2398,6 @@ return {
 				noteTime = 75576.923076923,
 				noteType = 1,
 				noteLength = 0
-			},
-			{
-				noteTime = 73961.5384615384,
-				noteType = 2,
-				noteLength = 0
-			},
-			{
-				noteTime = 74653.8461538461,
-				noteType = 2,
-				noteLength = 0
-			},
-			{
-				noteTime = 75461.5384615384,
-				noteType = 0,
-				noteLength = 0
 			}
 		}
 	},
@@ -2612,21 +2457,6 @@ return {
 			{
 				noteTime = 77307.6923076923,
 				noteType = 1,
-				noteLength = 0
-			},
-			{
-				noteTime = 76269.2307692307,
-				noteType = 0,
-				noteLength = 0
-			},
-			{
-				noteTime = 76961.5384615384,
-				noteType = 1,
-				noteLength = 0
-			},
-			{
-				noteTime = 76038.4615384615,
-				noteType = 3,
 				noteLength = 0
 			}
 		}
@@ -2863,16 +2693,6 @@ return {
 				noteTime = 82961.5384615384,
 				noteType = 3,
 				noteLength = 0
-			},
-			{
-				noteTime = 81346.1538461538,
-				noteType = 3,
-				noteLength = 0
-			},
-			{
-				noteTime = 82038.4615384615,
-				noteType = 3,
-				noteLength = 0
 			}
 		}
 	},
@@ -2933,21 +2753,6 @@ return {
 				noteTime = 84692.3076923076,
 				noteType = 3,
 				noteLength = 0
-			},
-			{
-				noteTime = 83423.0769230769,
-				noteType = 0,
-				noteLength = 0
-			},
-			{
-				noteTime = 83769.2307692307,
-				noteType = 3,
-				noteLength = 0
-			},
-			{
-				noteTime = 84230.7692307692,
-				noteType = 2,
-				noteLength = 0
 			}
 		}
 	},
@@ -2993,26 +2798,6 @@ return {
 				noteTime = 86307.6923076923,
 				noteType = 4,
 				noteLength = 0
-			},
-			{
-				noteTime = 84923.0769230769,
-				noteType = -1,
-				noteLength = Add Camera Zoom
-			},
-			{
-				noteTime = 85384.6153846153,
-				noteType = -1,
-				noteLength = Add Camera Zoom
-			},
-			{
-				noteTime = 85846.1538461538,
-				noteType = -1,
-				noteLength = Add Camera Zoom
-			},
-			{
-				noteTime = 86307.6923076923,
-				noteType = -1,
-				noteLength = Add Camera Zoom
 			}
 		}
 	},
@@ -3028,16 +2813,6 @@ return {
 				noteTime = 86769.2307692307,
 				noteType = 6,
 				noteLength = 346.153846153846
-			},
-			{
-				noteTime = 86774.0384615384,
-				noteType = -1,
-				noteLength = Triggers Racing
-			},
-			{
-				noteTime = 86769.2307692307,
-				noteType = -1,
-				noteLength = Add Camera Zoom
 			}
 		}
 	},
@@ -3412,6 +3187,12 @@ return {
 	{
 		mustHitSection = true,
 		bpm = 155,
+		altAnim = false,
+		sectionNotes = {}
+	},
+	{
+		mustHitSection = true,
+		bpm = 130,
 		altAnim = false,
 		sectionNotes = {}
 	},

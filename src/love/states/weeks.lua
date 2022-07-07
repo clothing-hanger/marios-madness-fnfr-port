@@ -1245,7 +1245,13 @@ return {
 									graphics.setColor(1, 1, 1, math.min(1, (500 + (boyfriendNotes[i][j].y - musicPos)) / 75))
 								end
 							end
+							if ghostArrows then
+								love.graphics.setColor(1, 1, 1, 0.5)
+							else
+								love.graphics.setColor(1, 1, 1, 1)
+							end
 							boyfriendNotes[i][j]:draw()
+							love.graphics.setColor(1, 1, 1, 1)
 						end
 					end
 					graphics.setColor(1, 1, 1)

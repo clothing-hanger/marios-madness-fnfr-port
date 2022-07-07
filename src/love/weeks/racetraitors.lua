@@ -30,47 +30,85 @@ return {
 		song = songNum
 		difficulty = songAppend
 
-		stageBack = graphics.newImage(love.graphics.newImage(graphics.imagePath("week1/stage-back")))
-		stageFront = graphics.newImage(love.graphics.newImage(graphics.imagePath("week1/stage-front")))
-		curtains = graphics.newImage(love.graphics.newImage(graphics.imagePath("week1/curtains")))
-		lightLeft = graphics.newImage(love.graphics.newImage(graphics.imagePath("week1/light")))
-		lightRight = graphics.newImage(love.graphics.newImage(graphics.imagePath("week1/light")))
+		bgTwo = graphics.newImage(love.graphics.newImage(graphics.imagePath("racetraitors/bgTwo")))
+		bgThree = graphics.newImage(love.graphics.newImage(graphics.imagePath("racetraitors/bgThree")))
+		shell = graphics.newImage(love.graphics.newImage(graphics.imagePath("racetraitors/shell")))
 
 
-		lightLeft.x, lightLeft.y = -600, -500
-		lightRight.x, lightRight.y = 600, -500
-		lightRight.sizeX = -1
-		stageFront.y = 400
-		curtains.y = -100
 
-		enemy = love.filesystem.load("sprites/week1/daddy-dearest.lua")()
-		if simoc then -- for if you play as simoc
-			fakeBoyfriend = love.filesystem.load("sprites/boyfriend.lua")() -- Used for game over
-			boyfriend = love.filesystem.load("sprites/simoc.lua")()
-		end
+		enemy = love.filesystem.load("sprites/racetraitors/mario.lua")()
+		boyfriend = love.filesystem.load("sprites/racetraitors/boyfriend.lua")()
+		girlfriend = love.filesystem.load("sprites/racetraitors/girlfriend.lua")()
+		bgOne = love.filesystem.load("sprites/racetraitors/bg.lua")()
+
+		item = love.filesystem.load("sprites/racetraitors/item.lua")()
+
+		talkOne = love.filesystem.load("sprites/racetraitors/talkOne.lua")()
+		talkTwo = love.filesystem.load("sprites/racetraitors/talkTwo.lua")()
+		talkThree = love.filesystem.load("sprites/racetraitors/talkThree.lua")()
+
+
+		shellCrack = love.audio.newSource("sounds/racetraitors/shell.ogg", "stream")
 		
 		girlfriend.x, girlfriend.y = 30, -90
 		enemy.x, enemy.y = -380, -110
 		boyfriend.x, boyfriend.y = 260, 100
 
-		enemyIcon:animate("daddy dearest", false)
+		enemyIcon:animate("golden land", false)
 
 		self:load()
+
+		marioTalk = function()
+			talkHasHappened = true
+			talkOneIsHappening = true
+			talkOne:animate("anim", true)
+			if not talkOne:isAnimated() then
+				if musicTime > 1866 then
+					if not talkTwoHasHappened then
+						talkOneIsHappening = false
+						talkTwoIsHappening = true
+						talkTwo:animate("anim", true)
+						talkTwoHasHappened = true
+					end
+				end
+			end
+			if not talkTwo:isAnimated() then
+				if musicTime > 1866 then
+					if not talkThreeHasHappened then
+						talkThree:animate("anim", true)
+						talkTwoIsHappening = false
+						talkThreeIsHappening = true
+						talkThreeHasHappened = true
+					end 
+				end
+			end
+		end
+
+		shellFunc = function()
+			shell.x = -500
+			Timer.tween(0.7, shell, {x = -300}, "linear")
+			shellCrack:play()
+			health = health - 2
+		end
+
+		item:animate("empty", true)
+
+		item:setAnimSpeed(12)
 	end,
 
 	load = function(self)
+
+		talkHasHappened = false
+		talkTwoHasHappened = false
+		talkThreeHasHappened = false
+
+		talkOneIsHappening = false
+		talkTwoIsHappening = false
+		talkThreeIsHappening = false
 		weeks:load()
 
-		if song == 3 then
-			inst = love.audio.newSource("music/week1/dadbattle-inst.ogg", "stream")
-			voices = love.audio.newSource("music/week1/dadbattle-voices.ogg", "stream")
-		elseif song == 2 then
-			inst = love.audio.newSource("music/week1/fresh-inst.ogg", "stream")
-			voices = love.audio.newSource("music/week1/fresh-voices.ogg", "stream")
-		else
-			inst = love.audio.newSource("music/week1/bopeebo-inst.ogg", "stream")
-			voices = love.audio.newSource("music/week1/bopeebo-voices.ogg", "stream")
-		end
+		inst = love.audio.newSource("music/racetraitors/inst.ogg", "stream")
+		voices = love.audio.newSource("music/racetraitors/voices.ogg", "stream")
 
 		self:initUI()
 
@@ -80,36 +118,91 @@ return {
 	initUI = function(self)
 		weeks:initUI()
 
-		if song == 3 then
-			weeks:generateNotes(love.filesystem.load("charts/week1/dadbattle" .. difficulty .. ".lua")())
-		elseif song == 2 then
-			weeks:generateNotes(love.filesystem.load("charts/week1/fresh" .. difficulty .. ".lua")())
-		else
-			weeks:generateNotes(love.filesystem.load("charts/week1/bopeebo" .. difficulty .. ".lua")())
-		end
+		weeks:generateNotes(love.filesystem.load("charts/racetraitors/racetraitors.lua")())
 	end,
 
 	update = function(self, dt)
 		weeks:update(dt)
 
-		if song == 1 and musicThres ~= oldMusicThres and math.fmod(absMusicTime + 500, 480000 / bpm) < 100 then
-			weeks:safeAnimate(boyfriend, "hey", false, 3)
-			weeks:safeAnimate(girlfriend, "cheer", false, 1)
+		talkOne:update(dt)
+		talkTwo:update(dt)
+		talkThree:update(dt)
+
+		item:update(dt)
+
+		if musicTime > 1846 then
+			if not talkHasHappened then
+			--	shellFunc()
+				marioTalk()
+			end
 		end
+
+		if musicTime >= 39346 then
+			if item:getAnimName() == "empty" then
+				item:animate("random", true)
+			end
+		end
+
+		if musicTime >= 40615 then
+			if item:getAnimName() == "random" then
+				item:animate("shell", true)
+			end
+		end
+
+		if musicTime >= 55384 then
+			if item:getAnimName() == "shell" then
+				item:animate("ghost", true)
+			end
+		end
+
+		
+		if musicTime >= 70153 then
+			if item:getAnimName() == "ghost" then
+				item:animate("random", true)
+			end
+		end
+
+		if item:getAnimName() == "ghost" then
+			ghostArrows = true
+		else
+			ghostArrows = false
+		end
+
+		if musicTime > 42000 and musicTime < 42115 then
+			shellFunc()
+		end
+		if musicTime > 43846 and musicTime < 43961 then
+			shellFunc()
+		end
+		if musicTime > 47769 and musicTime < 47884 then
+			shellFunc()
+		end
+		if musicTime > 55153 and musicTime < 55269 then
+			shellFunc()
+		end
+
+
+
+		if shell.x < -10 then
+			shellDraw = false
+		else 
+			shellDraw = true
+		end
+
 		
 
 		if health >= 80 then
-			if enemyIcon:getAnimName() == "daddy dearest" then
-				enemyIcon:animate("daddy dearest losing", false)
+			if enemyIcon:getAnimName() == "golden land" then
+				enemyIcon:animate("golden land", false)
 			end
 		else
-			if enemyIcon:getAnimName() == "daddy dearest losing" then
-				enemyIcon:animate("daddy dearest", false)
+			if enemyIcon:getAnimName() == "golden land" then
+				enemyIcon:animate("golden land", false)
 			end
 		end
 
 		if not (countingDown or graphics.isFading()) and not (inst:isPlaying() and voices:isPlaying()) then
-			if storyMode and song < 3 then
+			if storyMode and song < 1 then
 				song = song + 1
 
 				self:load()
@@ -119,7 +212,7 @@ return {
 				graphics.fadeOut(
 					0.5,
 					function()
-						Gamestate.switch(menu)
+						Gamestate.switch(songsMenu)
 
 						status.setLoading(false)
 					end
@@ -138,8 +231,11 @@ return {
 			love.graphics.push()
 				love.graphics.translate(cam.x * 0.9, cam.y * 0.9)
 
-				stageBack:draw()
-				stageFront:draw()
+				bgTwo:draw()
+				bgThree:draw()
+
+				bgOne:draw()
+
 
 				girlfriend:draw()
 			love.graphics.pop()
@@ -148,13 +244,27 @@ return {
 
 				enemy:draw()
 				boyfriend:draw()
+
+				if talkOneIsHappening then
+					talkOne:draw()
+				end
+				if talkTwoIsHappening then
+					talkTwo:draw()
+				end
+				if talkThreeIsHappening then
+					talkThree:draw()
+				end
+
+
+
+				shell:draw()
+
+				item:draw()
 			love.graphics.pop()
 			love.graphics.push()
 				love.graphics.translate(cam.x * 1.1, cam.y * 1.1)
 
-				lightLeft:draw()
-				lightRight:draw()
-				curtains:draw()
+
 			love.graphics.pop()
 			weeks:drawRating(0.9)
 		love.graphics.pop()
@@ -163,9 +273,6 @@ return {
 	end,
 
 	leave = function(self)
-		stageBack = nil
-		stageFront = nil
-		curtains = nil
 
 		weeks:leave()
 	end
