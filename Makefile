@@ -88,7 +88,7 @@ switch: lovefile
 	@mkdir -p build/switch/switch/funkin-rewritten
 
 
-	@C:/devkitPro/tools/bin/nacptool.exe --create "Friday Night Funkin' Rewritten" HTV04 "$(shell cat version.txt)" build/switch/funkin-rewritten.nacp
+	@C:/devkitPro/tools/bin/nacptool.exe --create "Friday Night Funkin' Mario's Madness" Clothing Hanger "$(shell cat version.txt)" build/switch/funkin-rewritten.nacp
 
 
 	@mkdir build/switch/romfs
