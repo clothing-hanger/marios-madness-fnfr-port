@@ -204,8 +204,8 @@ return {
 							if love.system.getOS() == "NX" then
 								Gamestate.switch(powerdownControls)
 							else
-								--Gamestate.switch(songPowerdownFaceDodge)
-								Gamestate.switch(songRacetraitors)
+								Gamestate.switch(songPowerdownFaceDodge)
+								--Gamestate.switch(songRacetraitors)
 							end
 							status.setLoading(false)
 						end

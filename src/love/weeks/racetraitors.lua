@@ -47,11 +47,19 @@ return {
 		talkTwo = love.filesystem.load("sprites/racetraitors/talkTwo.lua")()
 		talkThree = love.filesystem.load("sprites/racetraitors/talkThree.lua")()
 
+		talkOne.x = 0
+		talkTwo.x = 0
+		talkThree.x = 0
+
+		talkOne.y = -110
+		talkTwo.y = -110
+		talkThree.y = -110
+
 
 		shellCrack = love.audio.newSource("sounds/racetraitors/shell.ogg", "stream")
 		
 		girlfriend.x, girlfriend.y = 30, -90
-		enemy.x, enemy.y = -380, -110
+		enemy.x, enemy.y = 0, -110
 		boyfriend.x, boyfriend.y = 260, 100
 
 		enemyIcon:animate("golden land", false)
@@ -59,15 +67,57 @@ return {
 		self:load()
 
 		marioTalk = function()
+				Timer.script(function(wait)
+					talkOneIsHappening = true
+					--talkOne:animate("anim", false)
+					wait(3.1)
+					talkOneIsHappening = false
+					talkTwoIsHappening = true
+
+				
+					--talkTwo:animate("anim", false)
+					
+					wait(2.5)
+					talkTwoIsHappening = false
+					talkThreeIsHappening = true
+					--talkThree:animate("anim", false)
+
+				
+
+				
+					wait(2)
+					talkThreeIsHappening = false
+					talkHasHappened = true
+				end)
+				
+
+				
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			--[[
 			talkHasHappened = true
 			talkOneIsHappening = true
-			talkOne:animate("anim", true)
+			talkOne:animate("anim", false)
 			if not talkOne:isAnimated() then
 				if musicTime > 1866 then
 					if not talkTwoHasHappened then
 						talkOneIsHappening = false
 						talkTwoIsHappening = true
-						talkTwo:animate("anim", true)
+						talkTwo:animate("anim", false)
 						talkTwoHasHappened = true
 					end
 				end
@@ -75,13 +125,20 @@ return {
 			if not talkTwo:isAnimated() then
 				if musicTime > 1866 then
 					if not talkThreeHasHappened then
-						talkThree:animate("anim", true)
+						talkThree:animate("anim", false)
 						talkTwoIsHappening = false
 						talkThreeIsHappening = true
 						talkThreeHasHappened = true
 					end 
 				end
 			end
+
+			-]]
+
+
+
+
+
 		end
 
 		shellFunc = function()
@@ -89,6 +146,16 @@ return {
 			Timer.tween(0.7, shell, {x = -300}, "linear")
 			shellCrack:play()
 			health = health - 2
+		end
+
+		marioDriveIn = function()
+
+			marioDriveInHasHappened = true
+
+			Timer.tween(1.5, enemy, {x = talkOne.x - 380}, "out-back")
+			Timer.tween(1.5, talkOne, {x = -380}, "out-back")
+			Timer.tween(1.5, talkTwo, {x = -380}, "out-back")
+			Timer.tween(1.5, talkThree, {x = -380}, "out-back")
 		end
 
 		item:animate("empty", true)
@@ -105,6 +172,11 @@ return {
 		talkOneIsHappening = false
 		talkTwoIsHappening = false
 		talkThreeIsHappening = false
+		wtfEvenAreTheseBooleanNamesAnymoreOne = false
+		wtfEvenAreTheseBooleanNamesAnymoreTwo = false
+		wtfEvenAreTheseBooleanNamesAnymoreThree = false
+
+		marioDriveInHasHappened = false
 		weeks:load()
 
 		inst = love.audio.newSource("music/racetraitors/inst.ogg", "stream")
@@ -129,6 +201,7 @@ return {
 		talkThree:update(dt)
 
 		item:update(dt)
+		bgOne:update(dt)
 
 		if musicTime > 1846 then
 			if not talkHasHappened then
@@ -136,6 +209,40 @@ return {
 				marioTalk()
 			end
 		end
+
+		if musicTime > 567 and not marioDriveInHasHappened then
+			marioDriveIn()
+		end
+
+		--[[
+
+		if musicTime > 1846 then
+			talkOne:animate("anim", false)
+		end
+
+
+		if musicTime > 3807 then
+			talkTwo:animate("anim", false)
+		end
+
+
+		--]]
+
+		if talkOneIsHappening and not wtfEvenAreTheseBooleanNamesAnymoreOne then
+			wtfEvenAreTheseBooleanNamesAnymoreOne = true
+			talkOne:animate("anim", false)
+		end
+
+		if talkTwoIsHappening and not wtfEvenAreTheseBooleanNamesAnymoreTwo then
+			wtfEvenAreTheseBooleanNamesAnymoreTwo = true
+			talkTwo:animate("anim", false)
+		end
+
+		if talkThreeIsHappening and not wtfEvenAreTheseBooleanNamesAnymoreThree then
+			wtfEvenAreTheseBooleanNamesAnymoreThree = true
+			talkThree:animate("anim", false)
+		end
+		
 
 		if musicTime >= 39346 then
 			if item:getAnimName() == "empty" then
@@ -242,16 +349,19 @@ return {
 			love.graphics.push()
 				love.graphics.translate(cam.x, cam.y)
 
-				enemy:draw()
+				if musicTime > 9230 then
+					enemy:draw()
+				end
+	
 				boyfriend:draw()
 
-				if talkOneIsHappening then
+				if talkOneIsHappening and musicTime < 9230 then
 					talkOne:draw()
 				end
-				if talkTwoIsHappening then
+				if talkTwoIsHappening and musicTime < 9230 then
 					talkTwo:draw()
 				end
-				if talkThreeIsHappening then
+				if talkThreeIsHappening and musicTime < 9230 then
 					talkThree:draw()
 				end
 

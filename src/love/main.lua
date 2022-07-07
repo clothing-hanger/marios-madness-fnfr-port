@@ -61,6 +61,7 @@ function love.load()
 	powerdownControls = require "states.menu.controls"
 	shoulderWeeks = require "states.shoulderWeeks"
 	faceWeeks = require "states.faceWeeks"
+	raceTraitorsWarning = require "states.raceTraitorsWarn"
 
 
 

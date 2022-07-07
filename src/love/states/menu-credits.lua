@@ -15,6 +15,8 @@ return {
 		graphics.setFade(0)
 		graphics.fadeIn(0.5)
 
+		pressUpCounter = 0
+
 	end,
 
 	update = function(self, dt)
@@ -25,6 +27,14 @@ return {
 
 				Gamestate.switch(songsMenu)				
 			end
+		end
+
+		if input:pressed("up") then
+			pressUpCounter = pressUpCounter + 1
+		end
+
+		if pressUpCounter >= 10 then
+			Gamestate.switch(raceTraitorsWarning)
 		end
 	end,
 	draw = function(self)
