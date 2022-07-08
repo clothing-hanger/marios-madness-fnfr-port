@@ -60,6 +60,8 @@ return {
 
 		enemyIcon:animate("its a me", false)
 
+		enemy:setAnimSpeed(12)
+
 		self:load()
 	end,
 

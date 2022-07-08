@@ -138,7 +138,7 @@ return graphics.newSprite(
 		["off"] = {start = 3, stop = 3, speed = 0, offsetX = 0, offsetY = 0},
 		["on"] = {start = 62, stop = 62, speed = 0, offsetX = 0, offsetY = 0},
 		["end"] = {start = 63, stop = 63, speed = 0, offsetX = 0, offsetY = 0},
-		["hold"] = {start = 7, stop = 7, speed = 0, offsetX = 0, offsetY = 0},
+		["hold"] = {start = 64, stop = 64, speed = 0, offsetX = 0, offsetY = 0},
 		["confirm"] = {start = 65, stop = 68, speed = 24, offsetX = 0, offsetY = 0},
 		["press"] = {start = 69, stop = 88, speed = 24, offsetX = 0, offsetY = 0}
 	},

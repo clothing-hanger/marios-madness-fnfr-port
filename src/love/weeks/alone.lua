@@ -63,6 +63,8 @@ return {
 			fakeBoyfriend = love.filesystem.load("sprites/boyfriend.lua")() -- Used for game over
 			boyfriend = love.filesystem.load("sprites/simoc.lua")()
 		end
+
+		enemy:setAnimSpeed(12)
 		
 		enemy.x, enemy.y = -300, 10
 		enemy.sizeX, enemy.sizeY = 0.8, 0.8

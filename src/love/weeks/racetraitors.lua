@@ -62,6 +62,8 @@ return {
 		enemy.x, enemy.y = 0, -110
 		boyfriend.x, boyfriend.y = 260, 100
 
+
+		enemy:setAnimSpeed(12)
 		enemyIcon:animate("golden land", false)
 
 		self:load()

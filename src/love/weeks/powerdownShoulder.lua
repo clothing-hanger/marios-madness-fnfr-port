@@ -96,6 +96,9 @@ return {
 		cloud:animate("anim", true)
 		bush:animate("anim", true)
 
+
+		enemy:setAnimSpeed(12)
+		
 		function marioJump()
 			enemy:animate("right", true)
 			Timer.tween(0.3, enemy, {y = enemy.y - 100}, "out-expo", function()

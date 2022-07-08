@@ -93,6 +93,8 @@ return {
 
 		boo.sizeX = -1
 
+		enemy:setAnimSpeed(12)
+
 
 		enemyIcon:animate("i hate you", false)
 		boo:animate("anim", true)
@@ -154,6 +156,8 @@ return {
 	load = function(self)
 		weeks:load()
 
+		firstZoomHasHappened = false
+
 
 		inst = love.audio.newSource("music/i-hate-you/inst.ogg", "stream")
 		voices = love.audio.newSource("music/i-hate-you/voices.ogg", "stream")
@@ -192,6 +196,14 @@ return {
 
 		if IHYFadeIntro then
 			IHYIntroFade = IHYIntroFade - 0.9999 * delta
+		end
+
+		if musicTime > 10892 and not firstZoomHasHappened then
+			firstZoomHasHappened = true
+			Timer.tween(0.6, cam, {sizeX = 1.35, sizeY = 1.35}, "out-quad", function()
+				Timer.tween(0.4, cam, {sizeX = 1, sizeY = 1}, "out-quad", function()
+				end)
+			end)
 		end
 
 		if musicTime >= 112857 then

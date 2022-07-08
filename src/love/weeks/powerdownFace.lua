@@ -82,6 +82,8 @@ return {
 		wahoo.sizeY, wahoo.sizeX = 0, 0
 		wahoo.y = -75
 
+		enemy:setAnimSpeed(12)
+
 
 		--size
 		boyfriend.sizeX, boyfriend.sizeY = 0.9, 0.9
@@ -116,6 +118,14 @@ return {
 
 	load = function(self)
 		faceWeeks:load()
+
+		firstZoomHasHappened = false
+		secondZoomHasHappened = false
+		thirdZoomHasHappened = false
+		fourthZoomHasHappened = false
+		fifthZoomHasHappened = false
+		sixthZoomHasHappened = false
+		seventhZoomHasHappened = false
 
 		inst = love.audio.newSource("music/powerdown/inst.ogg", "stream")
 		voices = love.audio.newSource("music/powerdown/voices.ogg", "stream")
@@ -262,6 +272,55 @@ return {
 				marioJump()
 			end
 		end 
+
+		--[[    the camera thing but it doesnt work
+
+		if musicTime > 101965 and not firstZoomHasHappened then   -- in
+			firstZoomHasHappened = true
+			Timer.tween(0.4, cam, {sizeX = 1.3, sizeY = 1.3}, "out-quad")
+		end
+
+
+		if musicTime > 101975 and not secondZoomHasHappened then    -- in
+			secondZoomHasHappened = true
+			Timer.tween(0.4, cam, {sizeX = 1.6, sizeY = 1.6}, "out-quad")
+		end
+
+
+		
+		if musicTime > 101462 and not thirdZoomHasHappened then        -- out
+			thirdZoomHasHappened = true
+			Timer.tween(0.1, cam, {sizeX = 1.5, sizeY = 1.5}, "out-quad")
+		end
+
+
+		if musicTime > 110588 and not fourthZoomHasHappened then   -- out
+			fourthZoomHasHappened = true
+			Timer.tween(0.1, cam, {sizeX = 1.4, sizeY = 1.4}, "out-quad")
+		end
+
+
+		if musicTime > 110635 and not fifthZoomHasHappened then --  out
+			fifthZoomHasHappened = true
+			Timer.tween(0.1, cam, {sizeX = 1.3, sizeY = 1.3}, "out-quad")
+		end
+
+
+		if musicTime > 110677 and not sixthZoomHasHappened then -- out
+			sixthZoomHasHappened = true
+			Timer.tween(0.1, cam, {sizeX = 1.2, sizeY = 1.2}, "out-quad")
+		end
+
+
+		if musicTime > 110809 and not seventhZoomHasHappened then  -- out
+			seventhZoomHasHappened = true
+			Timer.tween(0.15, cam, {sizeX = 1, sizeY = 1}, "out-quad")
+		end
+
+		--]]
+
+
+		
 
 
 		faceWeeks:updateUI(dt)

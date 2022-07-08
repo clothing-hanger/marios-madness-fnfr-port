@@ -72,6 +72,8 @@ return {
 		bg:animate("anim", true)
 		redThing:animate("anim", true)
 
+		enemy:setAnimSpeed(12)
+
 		self:load()
 	end,
 

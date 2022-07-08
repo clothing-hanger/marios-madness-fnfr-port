@@ -85,6 +85,9 @@ return {
 		static:animate("anim", true)
 		fakeGirlfriend:animate("idle", true)
 
+		enemy:setAnimSpeed(12)
+		enemyTwo:setAnimSpeed(12)
+
 		function goldenLandIntro()
 			Timer.script(function(wait)
 				countingDown = true
