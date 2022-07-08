@@ -111,6 +111,9 @@ return {
 	load = function(self)
 		weeks:load()
 
+		firstZoomHasHappened = false
+		secondZoomHasHappened = false
+
 		inst = love.audio.newSource("music/golden-land/inst.ogg", "stream")
 		voices = love.audio.newSource("music/golden-land/voices.ogg", "stream")
 
@@ -155,10 +158,25 @@ return {
 			end
 		end
 		
-		if musicTime > 43773.06 then
-			if musicTime < 43816.162 then
-			--	Timer.tween(0.2, cam, {x = cam.x - 35, y = cam.y + 35}, "in-out-elastic")
+		if musicTime > 41373.06 then
+			if not firstZoomHasHappened then
+				firstZoomHasHappened = true
+				Timer.tween(1.25, cam, {x = -enemy.x - 100, y = -enemy.y + 75}, "out-quad", function()
+					Timer.tween(1.2, cam, {sizeX = 1.6, sizeY = 1.6}, "in-back", function()
+						Timer.tween(0.5, cam, {sizeX = 1, sizeY = 1}, "out-expo", function()
+						end)
+					end)
+				end)
 			end
+		end
+
+		if musicTime > 100324 and not secondZoomHasHappened then
+			secondZoomHasHappened = true
+			Timer.tween(1, cam, {x = -enemy.x - 100, y = -enemy.y + 75}, "out-quad")
+			Timer.tween(1.4, cam, {sizeX = 1.8, sizeY = 1.8}, "in-quad", function()
+				Timer.tween(0.2, cam, {sizeX = 1, sizeY = 1}, "out-quad", function()
+				end)
+			end)
 		end
 			
 

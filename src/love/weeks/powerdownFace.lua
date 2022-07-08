@@ -101,7 +101,7 @@ return {
 		static:animate("anim", true)
 
 		function marioJump()
-			--enemy:animate("right", false)
+			enemy:animate("right", true)
 			Timer.tween(0.3, enemy, {y = enemy.y - 100}, "out-expo", function()
 				enemy:animate("down", false)
 				Timer.tween(0.2, enemy, {y = enemy.y + 100}, "in-expo", function()
