@@ -239,11 +239,6 @@ return {
 				love.graphics.setColor(1, 1, 1)
 
 
-
-			love.graphics.pop()
-			love.graphics.push()
-				love.graphics.translate(cam.x, cam.y)
-
 				if musicTime > 43772 then
 					enemyTwo:draw()
 				else
@@ -252,6 +247,12 @@ return {
 
 
 				boyfriend:draw()
+
+
+			love.graphics.pop()
+			love.graphics.push()
+				love.graphics.translate(cam.x, cam.y)
+
 			love.graphics.pop()
 			love.graphics.push()
 				love.graphics.translate(cam.x * 1.1, cam.y * 1.1)
